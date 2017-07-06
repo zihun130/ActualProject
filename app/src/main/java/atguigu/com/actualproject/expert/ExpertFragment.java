@@ -1,5 +1,6 @@
 package atguigu.com.actualproject.expert;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,6 +10,7 @@ import atguigu.com.actualproject.R;
 import atguigu.com.actualproject.base.BaseFragment;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 /**
  * Created by sun on 2017/7/6.
@@ -53,5 +55,16 @@ public class ExpertFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.reset(this);
+    }
+
+    @OnClick({R.id.title_image, R.id.title_select})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.title_image:
+                startActivity(new Intent(context,SearchPersonActivity.class));
+                break;
+            case R.id.title_select:
+                break;
+        }
     }
 }

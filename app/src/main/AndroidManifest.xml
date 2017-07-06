@@ -16,7 +16,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.MainActivity" />
-        <activity android:name=".activity.GuidanceActivity"></activity>
+        <activity android:name=".activity.GuidanceActivity" />
+        <activity android:name=".shopping.SearchActivity" />
+        <activity android:name=".expert.SearchPersonActivity"></activity>
     </application>
 
 </manifest>

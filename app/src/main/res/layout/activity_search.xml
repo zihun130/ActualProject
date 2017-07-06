@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_search"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1e2125"
+    android:orientation="vertical"
+    tools:context="atguigu.com.actualproject.shopping.SearchActivity">
+
+    <include layout="@layout/title_bar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="#ffffff">
+
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="搜索"
+            android:padding="10dp" />
+
+        <ImageView
+            android:id="@+id/image_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/behind_sliding_search" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>
