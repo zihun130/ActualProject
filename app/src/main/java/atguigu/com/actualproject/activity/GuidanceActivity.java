@@ -68,6 +68,8 @@ public class GuidanceActivity extends AppCompatActivity {
 
             }
         });
+
+
     }
 
     private void initdata() {
@@ -77,9 +79,9 @@ public class GuidanceActivity extends AppCompatActivity {
             ImageView imageView = new ImageView(this);
             Glide.with(this)
                     .load(ids[i])
+                    .placeholder(R.drawable.feature1)
                     .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                     .into(imageView);
-            //imageView.setBackgroundResource(ids[i]);
             imageViews.add(imageView);
         }
     }

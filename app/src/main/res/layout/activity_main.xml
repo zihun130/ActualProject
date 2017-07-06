@@ -7,23 +7,51 @@
     android:orientation="vertical"
     tools:context="atguigu.com.actualproject.activity.MainActivity">
 
-    <include layout="@layout/title_bar"/>
     <FrameLayout
         android:id="@+id/fl_fragment"
         android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="0dp">
+        android:layout_height="0dp"
+        android:layout_weight="1">
     </FrameLayout>
+
     <RadioGroup
-        android:background="@drawable/setting_bg"
+        android:id="@+id/rg_main"
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="wrap_content"
+        android:background="#000000"
+        android:orientation="horizontal"
+        android:padding="8dp">
 
         <RadioButton
             android:id="@+id/rb_shopping"
-            android:text="商店"
             style="@style/myStyle"
             android:drawableTop="@drawable/rb_shopping_select"
-             />
+            android:text="商店" />
+
+        <RadioButton
+            android:id="@+id/rb_magazine"
+            style="@style/myStyle"
+            android:drawableTop="@drawable/rb_magazine_select"
+            android:text="杂志" />
+
+        <RadioButton
+            android:id="@+id/rb_expert"
+            style="@style/myStyle"
+            android:drawableTop="@drawable/rb_expert_select"
+            android:text="达人" />
+
+        <RadioButton
+            android:id="@+id/rb_all_goods"
+            style="@style/myStyle"
+            android:drawableTop="@drawable/rb_all_goods_select"
+            android:text="全部" />
+
+        <RadioButton
+            android:id="@+id/rb_personal_center"
+            style="@style/myStyle"
+            android:drawableTop="@drawable/rb_personal_center_select"
+            android:text="个人中心" />
     </RadioGroup>
+
+
 </LinearLayout>
