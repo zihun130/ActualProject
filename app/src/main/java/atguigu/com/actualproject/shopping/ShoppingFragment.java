@@ -7,9 +7,18 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import atguigu.com.actualproject.R;
 import atguigu.com.actualproject.Utils.UIUtils;
 import atguigu.com.actualproject.base.BaseFragment;
+import atguigu.com.actualproject.shopping.adapter.ShoppingAdapter;
+import atguigu.com.actualproject.shopping.pagers.BrandPager;
+import atguigu.com.actualproject.shopping.pagers.FirstPager;
+import atguigu.com.actualproject.shopping.pagers.GiftPager;
+import atguigu.com.actualproject.shopping.pagers.TopicPager;
+import atguigu.com.actualproject.shopping.pagers.TypePager;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -36,6 +45,10 @@ public class ShoppingFragment extends BaseFragment {
     @InjectView(R.id.viewpage_shopping)
     ViewPager viewpageShopping;
 
+    private List<BaseFragment> pagers;
+    private List<String> namelist;
+    private ShoppingAdapter adapter;
+
     @Override
     protected View initView() {
         View view = View.inflate(context, R.layout.fragment_shopping, null);
@@ -53,6 +66,33 @@ public class ShoppingFragment extends BaseFragment {
 
     @Override
     public void initData() {
+         pagers = new ArrayList<>();
+         pagers.add(new TypePager());
+         pagers.add(new BrandPager());
+         pagers.add(new FirstPager());
+         pagers.add(new TopicPager());
+         pagers.add(new GiftPager());
+
+        namelist = new ArrayList<>();
+        namelist.add("分类");
+        namelist.add("品牌");
+        namelist.add("首页");
+        namelist.add("专题");
+        namelist.add("礼物");
+
+          tablayoutShopping.addTab(tablayoutShopping.newTab().setText(namelist.get(0)));
+          tablayoutShopping.addTab(tablayoutShopping.newTab().setText(namelist.get(1)));
+          tablayoutShopping.addTab(tablayoutShopping.newTab().setText(namelist.get(2)));
+          tablayoutShopping.addTab(tablayoutShopping.newTab().setText(namelist.get(3)));
+          tablayoutShopping.addTab(tablayoutShopping.newTab().setText(namelist.get(4)));
+
+
+        adapter=new ShoppingAdapter(getActivity().getSupportFragmentManager(),pagers,namelist);
+
+        viewpageShopping.setAdapter(adapter);
+        viewpageShopping.setCurrentItem(2);
+
+        tablayoutShopping.setupWithViewPager(viewpageShopping);
 
     }
 
