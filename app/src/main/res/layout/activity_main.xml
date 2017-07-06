@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="atguigu.com.actualproject.activity.MainActivity">
+
+    <include layout="@layout/title_bar"/>
+    <FrameLayout
+        android:id="@+id/fl_fragment"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp">
+    </FrameLayout>
+    <RadioGroup
+        android:background="@drawable/setting_bg"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <RadioButton
+            android:id="@+id/rb_shopping"
+            android:text="商店"
+            style="@style/myStyle"
+            android:drawableTop="@drawable/rb_shopping_select"
+             />
+    </RadioGroup>
+</LinearLayout>
