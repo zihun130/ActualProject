@@ -23,7 +23,8 @@
         <activity android:name=".shopping.SearchActivity" />
         <activity android:name=".expert.SearchPersonActivity" />
         <activity android:name=".activity.GoodsInfoActivity" />
-        <activity android:name=".activity.BrandGoodsActivity"></activity>
+        <activity android:name=".activity.BrandGoodsActivity" />
+        <activity android:name=".activity.HtmlActivity"></activity>
     </application>
 
 </manifest>

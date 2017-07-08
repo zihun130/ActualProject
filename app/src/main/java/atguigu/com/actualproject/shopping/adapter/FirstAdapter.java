@@ -1,6 +1,7 @@
 package atguigu.com.actualproject.shopping.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import atguigu.com.actualproject.R;
+import atguigu.com.actualproject.activity.HtmlActivity;
 import atguigu.com.actualproject.shopping.pagers.bean.FirstBean;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -105,24 +107,35 @@ public class FirstAdapter extends RecyclerView.Adapter {
 
     class OneHolder extends RecyclerView.ViewHolder {
 
+        private final View converView;
         @InjectView(R.id.first_image)
         ImageView firstImage;
 
 
         public OneHolder(View converView) {
             super(converView);
+            this.converView=converView;
             ButterKnife.inject(this,converView);
         }
 
-        public void setData(FirstBean.DataBean.ItemsBean.ListBean listBean) {
+        public void setData(final FirstBean.DataBean.ItemsBean.ListBean listBean) {
             Glide.with(context)
                     .load(listBean.getOne().getPic_url())
                     .into(firstImage);
+            converView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(context, HtmlActivity.class);
+                    intent.putExtra("HTML",listBean.getOne().getTopic_url());
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 
     class TwoHolder extends RecyclerView.ViewHolder {
 
+        private final View converView;
         @InjectView(R.id.two_image)
         ImageView twoImage;
         @InjectView(R.id.two_images)
@@ -131,10 +144,11 @@ public class FirstAdapter extends RecyclerView.Adapter {
 
         public TwoHolder(View converView) {
             super(converView);
+            this.converView=converView;
             ButterKnife.inject(this,converView);
         }
 
-        public void setData(FirstBean.DataBean.ItemsBean.ListBean listBean) {
+        public void setData(final FirstBean.DataBean.ItemsBean.ListBean listBean) {
             Glide.with(context)
                     .load(listBean.getOne().getPic_url())
                     .into(twoImage);
@@ -142,11 +156,22 @@ public class FirstAdapter extends RecyclerView.Adapter {
                     .load(listBean.getTwo().getPic_url())
                     .into(twoImages);
 
+            converView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(context, HtmlActivity.class);
+                    intent.putExtra("HTML",listBean.getOne().getTopic_url());
+                    intent.putExtra("HTML",listBean.getTwo().getTopic_url());
+                    context.startActivity(intent);
+                }
+            });
+
 
         }
     }
 
     class ThreeHolder extends RecyclerView.ViewHolder {
+        private final View converView;
         @InjectView(R.id.three_one_image)
         ImageView threeOneImage;
         @InjectView(R.id.three_two_image)
@@ -155,10 +180,11 @@ public class FirstAdapter extends RecyclerView.Adapter {
         ImageView threeThreeImage;
         public ThreeHolder(View converView) {
             super(converView);
+            this.converView=converView;
             ButterKnife.inject(this,converView);
         }
 
-        public void setData(FirstBean.DataBean.ItemsBean.ListBean listBean) {
+        public void setData(final FirstBean.DataBean.ItemsBean.ListBean listBean) {
             Glide.with(context)
                     .load(listBean.getOne().getPic_url())
                     .into(threeOneImage);
@@ -168,11 +194,22 @@ public class FirstAdapter extends RecyclerView.Adapter {
             Glide.with(context)
                     .load(listBean.getThree().getPic_url())
                     .into(threeThreeImage);
+            converView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(context, HtmlActivity.class);
+                    intent.putExtra("HTML",listBean.getOne().getTopic_url());
+                    intent.putExtra("HTML",listBean.getTwo().getTopic_url());
+                    intent.putExtra("HTML",listBean.getThree().getTopic_url());
+                    context.startActivity(intent);
+                }
+            });
 
         }
     }
 
     class FourHolder extends RecyclerView.ViewHolder {
+        private final View converView;
         @InjectView(R.id.four_one_image)
         ImageView fourOneImage;
         @InjectView(R.id.four_two_image)
@@ -185,10 +222,11 @@ public class FirstAdapter extends RecyclerView.Adapter {
 
         public FourHolder(View converView) {
             super(converView);
+            this.converView=converView;
             ButterKnife.inject(this,converView);
         }
 
-        public void setData(FirstBean.DataBean.ItemsBean.ListBean listBean) {
+        public void setData(final FirstBean.DataBean.ItemsBean.ListBean listBean) {
             Glide.with(context)
                     .load(listBean.getOne().getPic_url())
                     .into(fourOneImage);
@@ -201,6 +239,18 @@ public class FirstAdapter extends RecyclerView.Adapter {
             Glide.with(context)
                     .load(listBean.getFour().getPic_url())
                     .into(fourFourImage);
+
+            converView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(context, HtmlActivity.class);
+                    intent.putExtra("HTML",listBean.getOne().getTopic_url());
+                    intent.putExtra("HTML",listBean.getTwo().getTopic_url());
+                    intent.putExtra("HTML",listBean.getThree().getTopic_url());
+                    intent.putExtra("HTML",listBean.getFour().getTopic_url());
+                    context.startActivity(intent);
+                }
+            });
 
         }
     }

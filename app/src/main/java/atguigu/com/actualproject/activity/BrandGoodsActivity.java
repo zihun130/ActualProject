@@ -126,6 +126,7 @@ public class BrandGoodsActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.title_back:
                 finish();
+                overridePendingTransition(R.anim.left_in,R.anim.right_out);
                 break;
             case R.id.title_shoppingcart:
                 UIUtils.showToast("购物车");
