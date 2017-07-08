@@ -109,7 +109,8 @@ public class BrandPager extends BaseFragment {
         }else {
             List<BrandBean.DataBean.ItemsBean> data = brandBean.getData().getItems();
                 if(data!=null && data.size()>0){
-                    items.addAll(data);
+
+                    items.addAll(0,data);
                     adapter.notifyDataSetChanged();
             }
         }

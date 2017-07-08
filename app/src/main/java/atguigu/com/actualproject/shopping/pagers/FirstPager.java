@@ -103,7 +103,7 @@ public class FirstPager extends BaseFragment {
         }else {
             List<FirstBean.DataBean.ItemsBean.ListBean> data = firstBean.getData().getItems().getList();
             if(data!=null && data.size()>0){
-                list.addAll(data);
+                list.addAll(0,data);
                 adapter.notifyDataSetChanged();
             }
         }

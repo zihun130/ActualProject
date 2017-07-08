@@ -104,7 +104,7 @@ public class TopicPager extends BaseFragment {
             topicRecyclerview.setAdapter(adapter);
         }else {
             List<TopicBean.DataBean.ItemsBean> data = topicBean.getData().getItems();
-            items.addAll(data);
+            items.addAll(0,data);
             adapter.notifyDataSetChanged();
         }
 

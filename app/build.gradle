@@ -35,4 +35,8 @@ dependencies {
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'com.zhy:okhttputils:2.6.2'
     compile 'com.cjj.materialrefeshlayout:library:1.3.0'
+    /*
+    设置圆形图片
+    * */
+    compile 'de.hdodenhof:circleimageview:2.1.0'
 }
