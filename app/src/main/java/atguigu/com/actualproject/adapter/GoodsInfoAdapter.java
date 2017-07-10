@@ -1,6 +1,7 @@
 package atguigu.com.actualproject.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,6 +52,8 @@ public class GoodsInfoAdapter extends RecyclerView.Adapter<GoodsInfoAdapter.Good
         holder.brandName.setText(itemsBean.getBrand_info().getBrand_name());
         holder.likeCount.setText(itemsBean.getLike_count());
         holder.goodsPrice.setText(itemsBean.getPrice());
+
+        holder.setListener(itemsBean.getGoods_id());
     }
 
     @Override
@@ -59,6 +62,7 @@ public class GoodsInfoAdapter extends RecyclerView.Adapter<GoodsInfoAdapter.Good
     }
 
     class GoodsViewHolder extends RecyclerView.ViewHolder {
+        private final View view;
         @InjectView(R.id.goods_image)
         ImageView goodsImage;
         @InjectView(R.id.goods_name)
@@ -71,7 +75,19 @@ public class GoodsInfoAdapter extends RecyclerView.Adapter<GoodsInfoAdapter.Good
         TextView goodsPrice;
         public GoodsViewHolder(View view) {
             super(view);
+            this.view=view;
             ButterKnife.inject(this,view);
+        }
+
+        public void setListener(final String goods_id) {
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(context,AllGoodsInfoActivity.class);
+                    intent.putExtra("GOODSINFO",goods_id);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }

@@ -3,6 +3,7 @@ package atguigu.com.actualproject.shopping.pagers;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
@@ -19,6 +20,7 @@ import atguigu.com.actualproject.shopping.adapter.FirstAdapter;
 import atguigu.com.actualproject.shopping.pagers.bean.FirstBean;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 import okhttp3.Call;
 
 /**
@@ -28,7 +30,9 @@ import okhttp3.Call;
 public class FirstPager extends BaseFragment {
     @InjectView(R.id.first_recycleview)
     RecyclerView firstRecycleview;
-    private String url="http://mobile.iliangcang.com/goods/newShopHome?app_key=Android&sig=3780CB0808528F7CE99081D295EE8C0F%7C116941220826768&uid=626138098&user_token=0516ed9429352c8e1e3bd11c63ba6f54&v=1.0";
+    @InjectView(R.id.top_image)
+    ImageView topImage;
+    private String url = "http://mobile.iliangcang.com/goods/newShopHome?app_key=Android&sig=3780CB0808528F7CE99081D295EE8C0F%7C116941220826768&uid=626138098&user_token=0516ed9429352c8e1e3bd11c63ba6f54&v=1.0";
     private FirstAdapter adapter;
     private boolean isloadMore = false;
     private MaterialRefreshLayout materialRefreshLayout;
@@ -61,7 +65,6 @@ public class FirstPager extends BaseFragment {
     }
 
 
-
     @Override
     public void initTitle() {
 
@@ -69,7 +72,7 @@ public class FirstPager extends BaseFragment {
 
     @Override
     public void initData() {
-         getDataNet();
+        getDataNet();
     }
 
     private void getDataNet() {
@@ -94,23 +97,22 @@ public class FirstPager extends BaseFragment {
         Gson gson = new Gson();
         FirstBean firstBean = gson.fromJson(json, FirstBean.class);
 
-        if(!isloadMore){
+        if (!isloadMore) {
             list = firstBean.getData().getItems().getList();
-            if(list!=null && list.size()>0){
-                adapter=new FirstAdapter(context,list);
+            if (list != null && list.size() > 0) {
+                adapter = new FirstAdapter(context, list);
                 firstRecycleview.setAdapter(adapter);
             }
-        }else {
+        } else {
             List<FirstBean.DataBean.ItemsBean.ListBean> data = firstBean.getData().getItems().getList();
-            if(data!=null && data.size()>0){
-                list.addAll(0,data);
+            if (data != null && data.size() > 0) {
+                list.addAll(0, data);
                 adapter.notifyDataSetChanged();
             }
         }
 
-        firstRecycleview.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
+        firstRecycleview.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
     }
-
 
 
     private void getLoadMore() {
@@ -135,5 +137,10 @@ public class FirstPager extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.reset(this);
+    }
+
+    @OnClick(R.id.top_image)
+    public void onViewClicked() {
+        firstRecycleview.scrollToPosition(0);
     }
 }

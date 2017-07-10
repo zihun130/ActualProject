@@ -15,6 +15,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:clickable="true"
                 android:scaleType="fitXY"
                 android:id="@+id/four_one_image"
                 android:layout_width="wrap_content"
@@ -27,6 +28,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:clickable="true"
                 android:scaleType="fitXY"
                 android:id="@+id/four_three_image"
                 android:layout_width="wrap_content"
@@ -46,6 +48,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:clickable="true"
                 android:scaleType="fitXY"
                 android:id="@+id/four_two_image"
                 android:layout_width="wrap_content"
@@ -58,6 +61,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:clickable="true"
                 android:scaleType="fitXY"
                 android:id="@+id/four_four_image"
                 android:layout_width="wrap_content"

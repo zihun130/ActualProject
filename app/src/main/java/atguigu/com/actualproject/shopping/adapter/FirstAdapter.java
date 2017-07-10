@@ -29,6 +29,10 @@ public class FirstAdapter extends RecyclerView.Adapter {
     private static final int TYPE_FOUR = 3;
     private final Context context;
     private final List<FirstBean.DataBean.ItemsBean.ListBean> datas;
+    @InjectView(R.id.two_image)
+    ImageView twoImage;
+    @InjectView(R.id.two_images)
+    ImageView twoImages;
 
 
     public FirstAdapter(Context context, List<FirstBean.DataBean.ItemsBean.ListBean> list) {
@@ -62,19 +66,19 @@ public class FirstAdapter extends RecyclerView.Adapter {
         View converView;
         switch (viewType) {
             case TYPE_ONE:
-                converView = View.inflate(context, R.layout.one_viewholder, null);
+                converView = View.inflate(context,R.layout.one_viewholder,null);
                 viewHolder = new OneHolder(converView);
                 break;
             case TYPE_TWO:
-                converView = View.inflate(context, R.layout.two_viewholder, null);
+                converView = View.inflate(context,R.layout.two_viewholder,null);
                 viewHolder = new TwoHolder(converView);
                 break;
             case TYPE_THREE:
-                converView = View.inflate(context, R.layout.three_viewholder, null);
+                converView = View.inflate(context,R.layout.three_viewholder,null);
                 viewHolder = new ThreeHolder(converView);
                 break;
             case TYPE_FOUR:
-                converView = View.inflate(context, R.layout.four_viewholder, null);
+                converView = View.inflate(context,R.layout.four_viewholder,null);
                 viewHolder = new FourHolder(converView);
                 break;
         }
@@ -104,7 +108,6 @@ public class FirstAdapter extends RecyclerView.Adapter {
         return datas.size();
     }
 
-
     class OneHolder extends RecyclerView.ViewHolder {
 
         private final View converView;
@@ -114,8 +117,8 @@ public class FirstAdapter extends RecyclerView.Adapter {
 
         public OneHolder(View converView) {
             super(converView);
-            this.converView=converView;
-            ButterKnife.inject(this,converView);
+            this.converView = converView;
+            ButterKnife.inject(this, converView);
         }
 
         public void setData(final FirstBean.DataBean.ItemsBean.ListBean listBean) {
@@ -125,66 +128,74 @@ public class FirstAdapter extends RecyclerView.Adapter {
             converView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=new Intent(context, HtmlActivity.class);
-                    intent.putExtra("HTML",listBean.getOne().getTopic_url());
+                    Intent intent = new Intent(context, HtmlActivity.class);
+                    intent.putExtra("HTML", listBean.getOne().getTopic_url());
+                    intent.putExtra("topic_name", listBean.getOne().getTopic_name());
                     context.startActivity(intent);
                 }
             });
         }
     }
 
-    class TwoHolder extends RecyclerView.ViewHolder {
+    class TwoHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private final View converView;
         @InjectView(R.id.two_image)
         ImageView twoImage;
         @InjectView(R.id.two_images)
         ImageView twoImages;
+        private FirstBean.DataBean.ItemsBean.ListBean listBean;
 
 
         public TwoHolder(View converView) {
             super(converView);
-            this.converView=converView;
-            ButterKnife.inject(this,converView);
+            ButterKnife.inject(this, converView);
         }
 
         public void setData(final FirstBean.DataBean.ItemsBean.ListBean listBean) {
+            this.listBean = listBean;
             Glide.with(context)
                     .load(listBean.getOne().getPic_url())
                     .into(twoImage);
             Glide.with(context)
                     .load(listBean.getTwo().getPic_url())
                     .into(twoImages);
+            twoImage.setOnClickListener(this);
+            twoImages.setOnClickListener(this);
+        }
 
-            converView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent=new Intent(context, HtmlActivity.class);
+        @Override
+        public void onClick(View v) {
+            Intent intent=new Intent(context,HtmlActivity.class);
+            switch (v.getId()) {
+                case R.id.two_image :
                     intent.putExtra("HTML",listBean.getOne().getTopic_url());
+                    intent.putExtra("topic_name",listBean.getOne().getTopic_name());
+                    break;
+                case R.id.two_images :
                     intent.putExtra("HTML",listBean.getTwo().getTopic_url());
-                    context.startActivity(intent);
-                }
-            });
-
-
+                    intent.putExtra("topic_name",listBean.getTwo().getTopic_name());
+                    break;
+            }
+            context.startActivity(intent);
         }
     }
 
-    class ThreeHolder extends RecyclerView.ViewHolder {
-        private final View converView;
+    class ThreeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @InjectView(R.id.three_one_image)
         ImageView threeOneImage;
         @InjectView(R.id.three_two_image)
         ImageView threeTwoImage;
         @InjectView(R.id.three_three_image)
         ImageView threeThreeImage;
+        private FirstBean.DataBean.ItemsBean.ListBean listBean;
+
         public ThreeHolder(View converView) {
             super(converView);
-            this.converView=converView;
-            ButterKnife.inject(this,converView);
+            ButterKnife.inject(this, converView);
         }
 
         public void setData(final FirstBean.DataBean.ItemsBean.ListBean listBean) {
+            this.listBean=listBean;
             Glide.with(context)
                     .load(listBean.getOne().getPic_url())
                     .into(threeOneImage);
@@ -194,22 +205,34 @@ public class FirstAdapter extends RecyclerView.Adapter {
             Glide.with(context)
                     .load(listBean.getThree().getPic_url())
                     .into(threeThreeImage);
-            converView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent=new Intent(context, HtmlActivity.class);
-                    intent.putExtra("HTML",listBean.getOne().getTopic_url());
-                    intent.putExtra("HTML",listBean.getTwo().getTopic_url());
-                    intent.putExtra("HTML",listBean.getThree().getTopic_url());
-                    context.startActivity(intent);
-                }
-            });
+            threeOneImage.setOnClickListener(this);
+            threeTwoImage.setOnClickListener(this);
+            threeThreeImage.setOnClickListener(this);
+        }
 
+        @Override
+        public void onClick(View v) {
+            Intent intent=new Intent(context,HtmlActivity.class);
+            switch (v.getId()) {
+                case R.id.three_one_image :
+                    intent.putExtra("HTML",listBean.getOne().getTopic_url());
+                    intent.putExtra("topic_name",listBean.getOne().getTopic_name());
+                    break;
+                case R.id.three_two_image :
+                    intent.putExtra("HTML",listBean.getTwo().getTopic_url());
+                    intent.putExtra("topic_name",listBean.getTwo().getTopic_name());
+                    break;
+                case R.id.three_three_image :
+                    intent.putExtra("HTML",listBean.getThree().getTopic_url());
+                    intent.putExtra("topic_name",listBean.getThree().getTopic_name());
+                    break;
+
+            }
+            context.startActivity(intent);
         }
     }
 
-    class FourHolder extends RecyclerView.ViewHolder {
-        private final View converView;
+    class FourHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @InjectView(R.id.four_one_image)
         ImageView fourOneImage;
         @InjectView(R.id.four_two_image)
@@ -218,15 +241,16 @@ public class FirstAdapter extends RecyclerView.Adapter {
         ImageView fourThreeImage;
         @InjectView(R.id.four_four_image)
         ImageView fourFourImage;
+        private FirstBean.DataBean.ItemsBean.ListBean listBean;
 
 
         public FourHolder(View converView) {
             super(converView);
-            this.converView=converView;
-            ButterKnife.inject(this,converView);
+            ButterKnife.inject(this, converView);
         }
 
         public void setData(final FirstBean.DataBean.ItemsBean.ListBean listBean) {
+            this.listBean=listBean;
             Glide.with(context)
                     .load(listBean.getOne().getPic_url())
                     .into(fourOneImage);
@@ -239,20 +263,38 @@ public class FirstAdapter extends RecyclerView.Adapter {
             Glide.with(context)
                     .load(listBean.getFour().getPic_url())
                     .into(fourFourImage);
-
-            converView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent=new Intent(context, HtmlActivity.class);
-                    intent.putExtra("HTML",listBean.getOne().getTopic_url());
-                    intent.putExtra("HTML",listBean.getTwo().getTopic_url());
-                    intent.putExtra("HTML",listBean.getThree().getTopic_url());
-                    intent.putExtra("HTML",listBean.getFour().getTopic_url());
-                    context.startActivity(intent);
-                }
-            });
+            fourOneImage.setOnClickListener(this);
+            fourTwoImage.setOnClickListener(this);
+            fourThreeImage.setOnClickListener(this);
+            fourFourImage.setOnClickListener(this);
 
         }
+
+        @Override
+        public void onClick(View v) {
+            Intent intent=new Intent(context,HtmlActivity.class);
+            switch (v.getId()) {
+                case R.id.four_one_image :
+                    intent.putExtra("HTML",listBean.getOne().getTopic_url());
+                    intent.putExtra("topic_name",listBean.getOne().getTopic_name());
+                    break;
+                case R.id.four_two_image :
+                    intent.putExtra("HTML",listBean.getTwo().getTopic_url());
+                    intent.putExtra("topic_name",listBean.getTwo().getTopic_name());
+                    break;
+                case R.id.four_three_image :
+                    intent.putExtra("HTML",listBean.getThree().getTopic_url());
+                    intent.putExtra("topic_name",listBean.getThree().getTopic_name());
+                    break;
+                case R.id.four_four_image :
+                    intent.putExtra("HTML",listBean.getFour().getTopic_url());
+                    intent.putExtra("topic_name",listBean.getFour().getTopic_name());
+                    break;
+
+            }
+            context.startActivity(intent);
+        }
+
     }
 
 }

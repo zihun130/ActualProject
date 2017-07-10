@@ -1,16 +1,27 @@
 package atguigu.com.actualproject.expert;
 
 import android.content.Intent;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import java.util.List;
+
 import atguigu.com.actualproject.R;
+import atguigu.com.actualproject.Utils.UIUtils;
 import atguigu.com.actualproject.base.BaseFragment;
+import atguigu.com.actualproject.expert.adapter.ExpertAdapter;
+import atguigu.com.actualproject.expert.bean.ExpertBean;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import okhttp3.Call;
 
 /**
  * Created by sun on 2017/7/6.
@@ -31,6 +42,9 @@ public class ExpertFragment extends BaseFragment {
     ImageView titleSelect;
     @InjectView(R.id.recycleview_expert)
     RecyclerView recycleviewExpert;
+    private String url="http://mobile.iliangcang.com/user/masterList?app_key=Android&count=18&page=1&sig=79F01B94B8EBEFAC8EEB344EE2B20AA2%7C383889010803768&v=1.0";
+    private ExpertAdapter adapter;
+    private GridLayoutManager manager;
 
     @Override
     protected View initView() {
@@ -48,7 +62,36 @@ public class ExpertFragment extends BaseFragment {
 
     @Override
     public void initData() {
+        getNetData();
 
+    }
+
+    private void getNetData() {
+        OkHttpUtils.get()
+                .url(url)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        UIUtils.showToast(e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        processData(response);
+                    }
+                });
+    }
+
+    private void processData(String json) {
+        ExpertBean expertBean = new Gson().fromJson(json, ExpertBean.class);
+        List<ExpertBean.DataBean.ItemsBean> items = expertBean.getData().getItems();
+
+        adapter=new ExpertAdapter(context,items);
+        recycleviewExpert.setAdapter(adapter);
+
+        manager = new GridLayoutManager(context, 3);
+        recycleviewExpert.setLayoutManager(manager);
     }
 
     @Override
