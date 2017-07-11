@@ -1,4 +1,4 @@
-package atguigu.com.actualproject.adapter;
+package atguigu.com.actualproject.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

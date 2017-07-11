@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import atguigu.com.actualproject.R;
+import atguigu.com.actualproject.activity.AllGoodsInfoActivity;
 import atguigu.com.actualproject.shopping.pagers.bean.GoodsBean;
 import butterknife.ButterKnife;
 import butterknife.InjectView;

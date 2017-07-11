@@ -90,7 +90,7 @@ public class ShoppingFragment extends BaseFragment {
         adapter=new ShoppingAdapter(getActivity().getSupportFragmentManager(),pagers,namelist);
 
         viewpageShopping.setAdapter(adapter);
-        viewpageShopping.setCurrentItem(2);
+        viewpageShopping.setCurrentItem(0);
 
         tablayoutShopping.setupWithViewPager(viewpageShopping);
 

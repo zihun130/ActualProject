@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_expert_info"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#1e2125"
+    tools:context="atguigu.com.actualproject.expert.ExpertInfoActivity">
+
+    <include layout="@layout/title_bar"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp">
+
+        <ImageView
+            android:id="@+id/expert_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:scaleType="fitXY" />
+
+        <TextView
+            android:id="@+id/expert_nameinfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@id/expert_image"
+            android:text="达人姓名"
+            android:textColor="#cacaca"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/expert_dutyinfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/expert_nameinfo"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/expert_image"
+            android:text="达人成就"
+            android:textColor="#747677"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/expert_btn1"
+            android:layout_margin="15dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:background="#464749"
+            android:textColor="#cccccc"
+            android:text="私信"
+            android:layout_width="60dp"
+            android:layout_height="20dp" />
+
+        <Button
+            android:layout_marginBottom="15dp"
+            android:layout_toLeftOf="@id/expert_btn1"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/expert_btn2"
+            android:background="#575b61"
+            android:textColor="#cccccc"
+            android:text="关注"
+            android:layout_width="60dp"
+            android:layout_height="20dp" />
+
+    </RelativeLayout>
+
+    <RadioGroup
+        android:layout_margin="15dp"
+        android:id="@+id/rg_expert_goods"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/like"
+            style="@style/brandStyle"
+            android:text="喜欢\n0" />
+
+        <View
+            android:background="#5a5d61"
+            android:layout_width="1dp"
+            android:layout_height="30dp"/>
+
+        <RadioButton
+            android:id="@+id/recommend"
+            style="@style/brandStyle"
+            android:text="推荐\n0" />
+        <View
+            android:background="#5a5d61"
+            android:layout_width="1dp"
+            android:layout_height="30dp"/>
+
+        <RadioButton
+            android:id="@+id/attention"
+            style="@style/brandStyle"
+            android:text="关注\n0" />
+        <View
+            android:background="#5a5d61"
+            android:layout_width="1dp"
+            android:layout_height="30dp"/>
+
+        <RadioButton
+            android:id="@+id/fans"
+            style="@style/brandStyle"
+            android:text="粉丝\n0" />
+    </RadioGroup>
+
+    <FrameLayout
+        android:id="@+id/fragment_fl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
+</LinearLayout>

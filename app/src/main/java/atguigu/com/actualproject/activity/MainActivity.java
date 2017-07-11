@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         ButterKnife.inject(this);
         initData();
         rgMain.setOnCheckedChangeListener(this);
-        rgMain.check(R.id.rb_shopping);
+        rgMain.check(R.id.rb_expert);
     }
 
     private void initData() {

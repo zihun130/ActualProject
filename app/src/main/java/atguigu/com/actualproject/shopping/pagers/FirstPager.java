@@ -36,7 +36,7 @@ public class FirstPager extends BaseFragment {
     private FirstAdapter adapter;
     private boolean isloadMore = false;
     private MaterialRefreshLayout materialRefreshLayout;
-    private List<FirstBean.DataBean.ItemsBean.ListBean> list;
+    private List<FirstBean.DataBean.ItemsBean.ListBeanX> list;
 
     @Override
     protected View initView() {
@@ -104,7 +104,7 @@ public class FirstPager extends BaseFragment {
                 firstRecycleview.setAdapter(adapter);
             }
         } else {
-            List<FirstBean.DataBean.ItemsBean.ListBean> data = firstBean.getData().getItems().getList();
+            List<FirstBean.DataBean.ItemsBean.ListBeanX> data = firstBean.getData().getItems().getList();
             if (data != null && data.size() > 0) {
                 list.addAll(0, data);
                 adapter.notifyDataSetChanged();

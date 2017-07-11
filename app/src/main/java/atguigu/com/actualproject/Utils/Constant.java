@@ -35,6 +35,19 @@ public class Constant {
     public static final String TYPEEIGHTEEN="http://mobile.iliangcang.com/goods/goodsShare?app_key=Android&cat_code=0198&count=10&coverId=1&page=1&sig=6E1DEF1DAFF84909ECD98F32FE6CDAD5%7C536890620070968&v=1.0";
     public static final String TYPENINETEEN="http://mobile.iliangcang.com/goods/goodsShare?app_key=Android&cat_code=0214&count=10&coverId=1&page=1&sig=6E1DEF1DAFF84909ECD98F32FE6CDAD5%7C536890620070968&v=1.0";
 
+    //杂志作者接口
+    public static final String MAGAZINEONE="http://mobile.iliangcang.com/topic/magazineList?app_key=Android&author_id=1&sig=2FA0974FFF1BC3DFA562AA63C8B5A84F%7C118265010131868&v=1.0";
+    public static final String MAGAZINETWO="http://mobile.iliangcang.com/topic/magazineList?app_key=Android&author_id=3&sig=2FA0974FFF1BC3DFA562AA63C8B5A84F%7C118265010131868&v=1.0";
+    public static final String MAGAZINETHREE="http://mobile.iliangcang.com/topic/magazineList?app_key=Android&author_id=4&sig=2FA0974FFF1BC3DFA562AA63C8B5A84F%7C118265010131868&v=1.0";
+    public static final String MAGAZINEFOUR="http://mobile.iliangcang.com/topic/magazineList?app_key=Android&author_id=5&sig=2FA0974FFF1BC3DFA562AA63C8B5A84F%7C118265010131868&v=1.0";
+    public static final String MAGAZINEFIVE="http://mobile.iliangcang.com/topic/magazineList?app_key=Android&author_id=6&sig=2FA0974FFF1BC3DFA562AA63C8B5A84F%7C118265010131868&v=1.0";
+    public static final String MAGAZINESIX="http://mobile.iliangcang.com/topic/magazineList?app_key=Android&author_id=7&sig=2FA0974FFF1BC3DFA562AA63C8B5A84F%7C118265010131868&v=1.0";
+    public static final String MAGAZINESEVEN="http://mobile.iliangcang.com/topic/magazineList?app_key=Android&author_id=8&sig=2FA0974FFF1BC3DFA562AA63C8B5A84F%7C118265010131868&v=1.0";
+    public static final String MAGAZINEEIGHT="http://mobile.iliangcang.com/topic/magazineList?app_key=Android&author_id=11&sig=2FA0974FFF1BC3DFA562AA63C8B5A84F%7C118265010131868&v=1.0";
+    public static final String MAGAZINENINE="http://mobile.iliangcang.com/topic/magazineList?app_key=Android&author_id=12&sig=2FA0974FFF1BC3DFA562AA63C8B5A84F%7C118265010131868&v=1.0";
+    public static final String MAGAZINETEN="http://mobile.iliangcang.com/topic/magazineList?app_key=Android&author_id=23&sig=2FA0974FFF1BC3DFA562AA63C8B5A84F%7C118265010131868&v=1.0";
+    public static final String MAGAZINEELEVEN="http://mobile.iliangcang.com/topic/magazineList?app_key=Android&author_id=13&sig=2FA0974FFF1BC3DFA562AA63C8B5A84F%7C118265010131868&v=1.0";
+    public static final String MAGAZINETWELVE="http://mobile.iliangcang.com/topic/magazineList?app_key=Android&author_id=14&sig=2FA0974FFF1BC3DFA562AA63C8B5A84F%7C118265010131868&v=1.0";
 
 
 

@@ -4,7 +4,7 @@
     android:id="@+id/activity_all_goods_info"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context="atguigu.com.actualproject.adapter.AllGoodsInfoActivity">
+    tools:context="atguigu.com.actualproject.activity.AllGoodsInfoActivity">
 
     <ScrollView
         android:id="@+id/scrollview_all"

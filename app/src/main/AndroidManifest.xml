@@ -25,7 +25,8 @@
         <activity android:name=".activity.GoodsInfoActivity" />
         <activity android:name=".activity.BrandGoodsActivity" />
         <activity android:name=".activity.HtmlActivity" />
-        <activity android:name=".adapter.AllGoodsInfoActivity"></activity>
+        <activity android:name=".activity.AllGoodsInfoActivity" />
+        <activity android:name=".expert.ExpertInfoActivity"></activity>
     </application>
 
 </manifest>

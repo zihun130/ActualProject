@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.cjj.MaterialRefreshLayout;
+import com.cjj.MaterialRefreshListener;
 import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -45,13 +47,41 @@ public class ExpertFragment extends BaseFragment {
     private String url="http://mobile.iliangcang.com/user/masterList?app_key=Android&count=18&page=1&sig=79F01B94B8EBEFAC8EEB344EE2B20AA2%7C383889010803768&v=1.0";
     private ExpertAdapter adapter;
     private GridLayoutManager manager;
+    private boolean isloadMore=false;
+    private String purl="http://mobile.iliangcang.com/user/masterList?app_key=Android&count=18&page=";
+    private String surl="&sig=79F01B94B8EBEFAC8EEB344EE2B20AA2%7C383889010803768&v=1.0";
+    private int  number=1;
+    private MaterialRefreshLayout materialRefreshLayout;
+    private List<ExpertBean.DataBean.ItemsBean> items;
 
     @Override
     protected View initView() {
         View view = View.inflate(context, R.layout.fragment_expert, null);
         ButterKnife.inject(this, view);
+
+        materialRefreshLayout = (MaterialRefreshLayout) view.findViewById(R.id.refresh);
+
+        materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
+            @Override
+            public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
+                isloadMore = false;
+                getNetData();
+
+            }
+
+            @Override
+            public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
+                super.onRefreshLoadMore(materialRefreshLayout);
+                isloadMore = true;
+                number++;
+                getLoadMore();
+
+            }
+        });
         return view;
     }
+
+
 
     @Override
     public void initTitle() {
@@ -79,19 +109,51 @@ public class ExpertFragment extends BaseFragment {
                     @Override
                     public void onResponse(String response, int id) {
                         processData(response);
+                        materialRefreshLayout.finishRefresh();
                     }
                 });
     }
 
     private void processData(String json) {
         ExpertBean expertBean = new Gson().fromJson(json, ExpertBean.class);
-        List<ExpertBean.DataBean.ItemsBean> items = expertBean.getData().getItems();
 
-        adapter=new ExpertAdapter(context,items);
-        recycleviewExpert.setAdapter(adapter);
+        if(!isloadMore){
+            items = expertBean.getData().getItems();
+            if(items!=null && items.size()>0){
+                adapter=new ExpertAdapter(context,items);
+                recycleviewExpert.setAdapter(adapter);
+            }
+
+        }else {
+            List<ExpertBean.DataBean.ItemsBean> data = expertBean.getData().getItems();
+            if(data!=null && data.size()>0){
+                items.addAll(0,data);
+                adapter.notifyDataSetChanged();
+            }
+        }
+
 
         manager = new GridLayoutManager(context, 3);
         recycleviewExpert.setLayoutManager(manager);
+    }
+
+    private void getLoadMore() {
+        OkHttpUtils.get()
+                .url(purl+number+surl)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        UIUtils.showToast(e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        processData(response);
+                        materialRefreshLayout.finishRefreshLoadMore();
+                    }
+                });
+
     }
 
     @Override

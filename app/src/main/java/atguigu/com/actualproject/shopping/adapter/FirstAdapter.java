@@ -27,15 +27,16 @@ public class FirstAdapter extends RecyclerView.Adapter {
     private static final int TYPE_TWO = 1;
     private static final int TYPE_THREE = 2;
     private static final int TYPE_FOUR = 3;
+    private static final int TYPE_FIVE = 4;
     private final Context context;
-    private final List<FirstBean.DataBean.ItemsBean.ListBean> datas;
+    private final List<FirstBean.DataBean.ItemsBean.ListBeanX> datas;
     @InjectView(R.id.two_image)
     ImageView twoImage;
     @InjectView(R.id.two_images)
     ImageView twoImages;
 
 
-    public FirstAdapter(Context context, List<FirstBean.DataBean.ItemsBean.ListBean> list) {
+    public FirstAdapter(Context context, List<FirstBean.DataBean.ItemsBean.ListBeanX> list) {
         this.context = context;
         this.datas = list;
     }
@@ -43,7 +44,7 @@ public class FirstAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemViewType(int position) {
         int itemViewType = -1;
-        FirstBean.DataBean.ItemsBean.ListBean listBean = datas.get(position);
+        FirstBean.DataBean.ItemsBean.ListBeanX listBean = datas.get(position);
 
         String type = listBean.getHome_type();
         if ("1".equals(type)) {
@@ -54,6 +55,8 @@ public class FirstAdapter extends RecyclerView.Adapter {
             itemViewType = TYPE_THREE;
         } else if ("4".equals(type)) {
             itemViewType = TYPE_FOUR;
+        } else if(Integer.parseInt(type)==6){
+            itemViewType = TYPE_FIVE;
         }
 
         return itemViewType;
@@ -81,6 +84,10 @@ public class FirstAdapter extends RecyclerView.Adapter {
                 converView = View.inflate(context,R.layout.four_viewholder,null);
                 viewHolder = new FourHolder(converView);
                 break;
+            case TYPE_FIVE:
+                converView = View.inflate(context,R.layout.one_viewholder,null);
+                viewHolder = new FiveHolder(converView);
+                break;
         }
         return viewHolder;
     }
@@ -99,6 +106,9 @@ public class FirstAdapter extends RecyclerView.Adapter {
         } else if (getItemViewType(position) == TYPE_FOUR) {
             FourHolder fourHolder = (FourHolder) holder;
             fourHolder.setData(datas.get(position));
+        } else if(getItemViewType(position)==TYPE_FIVE){
+            FiveHolder fiveHolder= (FiveHolder) holder;
+            fiveHolder.setData(datas.get(position));
         }
 
     }
@@ -106,6 +116,22 @@ public class FirstAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         return datas.size();
+    }
+
+    class FiveHolder extends RecyclerView.ViewHolder {
+        @InjectView(R.id.first_image)
+        ImageView firstImage;
+        public FiveHolder(View itemView) {
+            super(itemView);
+            ButterKnife.inject(this,itemView);
+        }
+
+        public void setData(final FirstBean.DataBean.ItemsBean.ListBeanX listBeanX) {
+            Glide.with(context)
+                    .load(listBeanX.getPic_url())
+                    .into(firstImage);
+
+        }
     }
 
     class OneHolder extends RecyclerView.ViewHolder {
@@ -121,7 +147,7 @@ public class FirstAdapter extends RecyclerView.Adapter {
             ButterKnife.inject(this, converView);
         }
 
-        public void setData(final FirstBean.DataBean.ItemsBean.ListBean listBean) {
+        public void setData(final FirstBean.DataBean.ItemsBean.ListBeanX listBean) {
             Glide.with(context)
                     .load(listBean.getOne().getPic_url())
                     .into(firstImage);
@@ -143,7 +169,7 @@ public class FirstAdapter extends RecyclerView.Adapter {
         ImageView twoImage;
         @InjectView(R.id.two_images)
         ImageView twoImages;
-        private FirstBean.DataBean.ItemsBean.ListBean listBean;
+        private FirstBean.DataBean.ItemsBean.ListBeanX listBean;
 
 
         public TwoHolder(View converView) {
@@ -151,7 +177,7 @@ public class FirstAdapter extends RecyclerView.Adapter {
             ButterKnife.inject(this, converView);
         }
 
-        public void setData(final FirstBean.DataBean.ItemsBean.ListBean listBean) {
+        public void setData(final FirstBean.DataBean.ItemsBean.ListBeanX listBean) {
             this.listBean = listBean;
             Glide.with(context)
                     .load(listBean.getOne().getPic_url())
@@ -187,14 +213,14 @@ public class FirstAdapter extends RecyclerView.Adapter {
         ImageView threeTwoImage;
         @InjectView(R.id.three_three_image)
         ImageView threeThreeImage;
-        private FirstBean.DataBean.ItemsBean.ListBean listBean;
+        private FirstBean.DataBean.ItemsBean.ListBeanX listBean;
 
         public ThreeHolder(View converView) {
             super(converView);
             ButterKnife.inject(this, converView);
         }
 
-        public void setData(final FirstBean.DataBean.ItemsBean.ListBean listBean) {
+        public void setData(final FirstBean.DataBean.ItemsBean.ListBeanX listBean) {
             this.listBean=listBean;
             Glide.with(context)
                     .load(listBean.getOne().getPic_url())
@@ -241,7 +267,7 @@ public class FirstAdapter extends RecyclerView.Adapter {
         ImageView fourThreeImage;
         @InjectView(R.id.four_four_image)
         ImageView fourFourImage;
-        private FirstBean.DataBean.ItemsBean.ListBean listBean;
+        private FirstBean.DataBean.ItemsBean.ListBeanX listBean;
 
 
         public FourHolder(View converView) {
@@ -249,7 +275,7 @@ public class FirstAdapter extends RecyclerView.Adapter {
             ButterKnife.inject(this, converView);
         }
 
-        public void setData(final FirstBean.DataBean.ItemsBean.ListBean listBean) {
+        public void setData(final FirstBean.DataBean.ItemsBean.ListBeanX listBean) {
             this.listBean=listBean;
             Glide.with(context)
                     .load(listBean.getOne().getPic_url())
@@ -296,5 +322,6 @@ public class FirstAdapter extends RecyclerView.Adapter {
         }
 
     }
+
 
 }
