@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="155dp"
+                    android:background="#40000000" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="95dp"
+                    android:background="#1e2125" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/shopping_image"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="80dp" />
+
+            <ImageView
+                android:id="@+id/shopping_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="170dp"
+                android:src="@drawable/close" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#1e2125"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/shopping_name"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:gravity="center_vertical"
+                android:text="商品名称"
+                android:textColor="#c7c7c7"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/shopping_content"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginLeft="15dp"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:lines="1"
+                android:text="商品名称"
+                android:textColor="#c7c7c7"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="15dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/moneytext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="￥"
+                    android:textColor="#678cb4"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/shopping_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:text="1999.0"
+                    android:textColor="#678cb4"
+                    android:textSize="25sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/count"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="数量"
+                        android:textColor="#c7c7c7" />
+                    
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none"
+                        android:background="@null">
+
+                        <RadioGroup
+                            android:gravity="center_vertical"
+                            android:paddingLeft="10dp"
+                            android:id="@+id/count_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal"></RadioGroup>
+
+                    </HorizontalScrollView>
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/capacity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="容量"
+                        android:textColor="#c7c7c7" />
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none"
+                        android:background="@null">
+
+                    <RadioGroup
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:id="@+id/capacity_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"></RadioGroup>
+
+                    </HorizontalScrollView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/shopping_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="种类"
+                        android:textColor="#c7c7c7" />
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none"
+                        android:background="@null">
+
+                    <RadioGroup
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:id="@+id/type_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"></RadioGroup>
+                </HorizontalScrollView>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/shopping_colors"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="颜色"
+                        android:textColor="#c7c7c7" />
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none"
+                        android:background="@null">
+
+                    <RadioGroup
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:id="@+id/color_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"></RadioGroup>
+
+                    </HorizontalScrollView>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/shopping_size"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="尺寸"
+                        android:textColor="#c7c7c7" />
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none"
+                        android:background="@null">
+
+
+                    <RadioGroup
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:id="@+id/size_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"></RadioGroup>
+
+                </HorizontalScrollView>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/shopping_clothing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="服装"
+                        android:textColor="#c7c7c7" />
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none"
+                        android:background="@null">
+
+                    <RadioGroup
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:id="@+id/clothing_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"></RadioGroup>
+
+                    </HorizontalScrollView>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/shopping_shoes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="鞋"
+                        android:textColor="#c7c7c7" />
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none"
+                        android:background="@null">
+
+                    <RadioGroup
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:id="@+id/shoes_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"></RadioGroup>
+
+                    </HorizontalScrollView>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/shopping_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="数量"
+                    android:textColor="#c7c7c7" />
+
+                <atguigu.com.actualproject.view.AddSubView
+                    android:id="@+id/shopping_count_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    app:maxvalue="100"
+                    app:minvalue="0"
+                    app:numberAddBackground="@drawable/add"
+                    app:numberSubBackground="@drawable/sub"
+                    app:value="1"></atguigu.com.actualproject.view.AddSubView>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/popu_btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#6f98c3"
+        android:text="确 认"
+        android:textColor="#cccccc"
+        android:textSize="20sp" />
+
+
+</LinearLayout>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textview1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:clickable="true"
+        android:textSize="15sp"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:background="#3fbff9"
+        android:text="分享到微信好友" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#dfdfdf" />
+
+    <TextView
+        android:id="@+id/textview2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:clickable="true"
+        android:textSize="15sp"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:background="#3fbff9"
+        android:text="分享到微信朋友圈" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#dfdfdf" />
+
+    <TextView
+        android:id="@+id/textview3"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:clickable="true"
+        android:textSize="15sp"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:background="#3fbff9"
+        android:text="分享到新浪微博" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#dfdfdf" />
+
+    <TextView
+        android:id="@+id/textview4"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:clickable="true"
+        android:textSize="15sp"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:background="#3fbff9"
+        android:text="分享到腾讯微博" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="#00000000" />
+
+    <TextView
+        android:id="@+id/textview5"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:clickable="true"
+        android:textSize="15sp"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:background="#3fbff9"
+        android:text="取消" />
+
+
+</LinearLayout>

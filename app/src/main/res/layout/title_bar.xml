@@ -54,5 +54,22 @@
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/title_forward"
+        android:src="@drawable/forward"
+        android:visibility="gone"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/title_favor_select"
+        android:background="@drawable/favor_select"
+        android:visibility="gone"
+        android:clickable="true"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@id/title_forward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>

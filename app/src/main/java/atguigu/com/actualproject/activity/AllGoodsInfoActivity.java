@@ -1,13 +1,20 @@
 package atguigu.com.actualproject.activity;
 
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -32,7 +39,9 @@ import butterknife.OnClick;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 import okhttp3.Call;
 
-public class AllGoodsInfoActivity extends AppCompatActivity {
+import static atguigu.com.actualproject.R.id.count;
+
+public class AllGoodsInfoActivity extends AppCompatActivity implements View.OnClickListener {
     @InjectView(R.id.all_goods_banner)
     Banner allGoodsBanner;
     @InjectView(R.id.all_doods_goodsname1)
@@ -105,14 +114,139 @@ public class AllGoodsInfoActivity extends AppCompatActivity {
     ImageView shardSDK;
     private String purl = "http://mobile.iliangcang.com/goods/goodsDetail?app_key=Android&goods_id=";
     private String surl = "&sig=430BD99E6C913B8B8C3ED109737ECF15%7C830952120106768&v=1.0";
+    private PopupWindow popupWindow;
+    private View popupView;
+    private TextView textview1;
+    private TextView textview2;
+    private TextView textview3;
+    private TextView textview4;
+    private TextView textview5;
+    private View popuinflate;
+    private PopupWindow window;
+    private ImageView back;
+    private TextView shoppingname;
+    private TextView shoppingcontent;
+    private TextView shoppingprice;
+    private RadioGroup countcontent;
+    private RadioGroup capacitycontent;
+    private RadioGroup typecontent;
+    private Button popubtn;
+    private ImageView shoppingimage;
+    private LinearLayout shoppingcount;
+    private LinearLayout capacity;
+    private LinearLayout shoppingtype;
+    private LinearLayout shoppingcolors;
+    private RadioGroup colorcontent;
+    private LinearLayout shoppingsize;
+    private RadioGroup sizecontent;
+    private LinearLayout shoppingclothing;
+    private RadioGroup clothingcontent;
+    private LinearLayout shoppingshoes;
+    private RadioGroup shoescontent;
+    private LinearLayout counts;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_goods_info);
         ButterKnife.inject(this);
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        //设置分享的popuwindow页面
+        popupView = getLayoutInflater().inflate(R.layout.popuwindow_item, null);
+
+        popupWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);
+
+        textview1 = (TextView) popupView.findViewById(R.id.textview1);
+        textview2 = (TextView) popupView.findViewById(R.id.textview2);
+        textview3 = (TextView) popupView.findViewById(R.id.textview3);
+        textview4 = (TextView) popupView.findViewById(R.id.textview4);
+        textview5 = (TextView) popupView.findViewById(R.id.textview5);
+
+        textview1.setOnClickListener(this);
+        textview2.setOnClickListener(this);
+        textview3.setOnClickListener(this);
+        textview4.setOnClickListener(this);
+        textview5.setOnClickListener(this);
+
+        popupWindow.setTouchable(true);
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
+        popupWindow.getContentView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_MENU && event.getRepeatCount() == 0
+                        && event.getAction() == KeyEvent.ACTION_DOWN) {
+                    if (popupWindow != null && popupWindow.isShowing()) {
+                        popupWindow.dismiss();
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
+        //设置购物车的popuwindow页面
+
+        popuinflate = getLayoutInflater().inflate(R.layout.popu_shoppingcar, null);
+        window = new PopupWindow(popuinflate, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, true);
+        window.setTouchable(true);
+        window.setOutsideTouchable(true);
+        window.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
+
+        //初始化各个控件
+        back = (ImageView) popuinflate.findViewById(R.id.shopping_back);
+        shoppingimage = (ImageView) popuinflate.findViewById(R.id.shopping_image);
+        shoppingname = (TextView) popuinflate.findViewById(R.id.shopping_name);
+        shoppingcontent = (TextView) popuinflate.findViewById(R.id.shopping_content);
+        shoppingprice = (TextView) popuinflate.findViewById(R.id.shopping_price);
+        //数量
+        counts = (LinearLayout) popuinflate.findViewById(count);
+        countcontent = (RadioGroup) popuinflate.findViewById(R.id.count_content);
+        //容量
+        capacity = (LinearLayout) popuinflate.findViewById(R.id.capacity);
+        capacitycontent = (RadioGroup) popuinflate.findViewById(R.id.capacity_content);
+        //种类
+        shoppingtype = (LinearLayout) popuinflate.findViewById(R.id.shopping_type);
+        typecontent = (RadioGroup) popuinflate.findViewById(R.id.type_content);
+        //颜色
+        shoppingcolors = (LinearLayout) popuinflate.findViewById(R.id.shopping_colors);
+        colorcontent = (RadioGroup) popuinflate.findViewById(R.id.color_content);
+        //尺寸
+        shoppingsize = (LinearLayout) popuinflate.findViewById(R.id.shopping_size);
+        sizecontent = (RadioGroup) popuinflate.findViewById(R.id.size_content);
+        //服装
+        shoppingclothing = (LinearLayout) popuinflate.findViewById(R.id.shopping_clothing);
+        clothingcontent = (RadioGroup) popuinflate.findViewById(R.id.clothing_content);
+        //鞋
+        shoppingshoes = (LinearLayout) popuinflate.findViewById(R.id.shopping_shoes);
+        shoescontent = (RadioGroup) popuinflate.findViewById(R.id.shoes_content);
+
+        popubtn = (Button) popuinflate.findViewById(R.id.popu_btn);
+
+
+        back.setOnClickListener(this);
+
+
+        //按键的监听
+        window.getContentView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_MENU && event.getRepeatCount() == 0
+                        && event.getAction() == KeyEvent.ACTION_DOWN) {
+                    if (window != null && window.isShowing()) {
+                        window.dismiss();
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
+
         initData();
     }
 
@@ -150,6 +284,7 @@ public class AllGoodsInfoActivity extends AppCompatActivity {
     private void setGoodsData(AllGoodsInfoBean.DataBean.ItemsBean items) {
         List<String> images_item = items.getImages_item();
 
+
         allGoodsBanner.setImages(images_item)
                 .setImageLoader(new GlidImageLoader())
                 .isAutoPlay(false)
@@ -184,6 +319,225 @@ public class AllGoodsInfoActivity extends AppCompatActivity {
         allDoodsGoodsname3.setText(items.getBrand_info().getBrand_name());
         allDoodsGoodsname4.setText(items.getBrand_info().getBrand_desc());
 
+
+        //设置添加购物车中popuwindow中的控件的数据
+        Glide.with(this)
+                .load(items.getGoods_image())
+                .into(shoppingimage);
+        shoppingname.setText(items.getBrand_info().getBrand_name());
+        shoppingcontent.setText(items.getGoods_name());
+        shoppingprice.setText(items.getPrice());
+
+        List<AllGoodsInfoBean.DataBean.ItemsBean.SkuInfoBean> sku_info = items.getSku_info();
+        for (int i = 0; i < sku_info.size(); i++) {
+            AllGoodsInfoBean.DataBean.ItemsBean.SkuInfoBean skuInfoBean = sku_info.get(i);
+            String type_name = skuInfoBean.getType_name();
+            if ("数量".equals(type_name)) {
+                counts.setVisibility(View.VISIBLE);
+                List<AllGoodsInfoBean.DataBean.ItemsBean.SkuInfoBean.AttrListBean> attrList = skuInfoBean.getAttrList();
+                for (int j = 0; j < attrList.size(); j++) {
+                    RadioButton radioButton = new RadioButton(getApplicationContext());
+                    if (radioButton == null) {
+                        return;
+                    } else {
+
+                        SetRadioButtonView(i, attrList, j, radioButton);
+                        countcontent.addView(radioButton, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                        //必须在添加进RadioGroup之后设置默认选中
+                        if (j == 0) {
+                            radioButton.setChecked(true);
+                        }
+                        //设置RadioButton在RadioGroup中的位置
+                        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) radioButton.getLayoutParams();
+
+                        layoutParams.setMargins(0, 0, 10, 0);
+
+                        radioButton.setLayoutParams(layoutParams);
+
+                    }
+                }
+            }
+
+
+
+            if ("容量".equals(type_name)) {
+                capacity.setVisibility(View.VISIBLE);
+                List<AllGoodsInfoBean.DataBean.ItemsBean.SkuInfoBean.AttrListBean> attrList = skuInfoBean.getAttrList();
+                for (int j = 0; j < attrList.size(); j++) {
+                    RadioButton radioButton = new RadioButton(getApplicationContext());
+                    if (radioButton == null) {
+                        return;
+                    } else {
+                        SetRadioButtonView(i, attrList, j, radioButton);
+
+                        capacitycontent.addView(radioButton, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                        if (j == 0) {
+                            radioButton.setChecked(true);
+                        }
+                        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) radioButton.getLayoutParams();
+
+                        layoutParams.setMargins(0, 0, 10, 0);
+
+                        radioButton.setLayoutParams(layoutParams);
+                    }
+                }
+            }
+
+
+
+            if ("种类".equals(type_name)) {
+                shoppingtype.setVisibility(View.VISIBLE);
+                List<AllGoodsInfoBean.DataBean.ItemsBean.SkuInfoBean.AttrListBean> attrList = skuInfoBean.getAttrList();
+                for (int j = 0; j < attrList.size(); j++) {
+                    RadioButton radioButton = new RadioButton(getApplicationContext());
+                    if (radioButton == null) {
+                        return;
+                    } else {
+                        SetRadioButtonView(i, attrList, j, radioButton);
+
+                        typecontent.addView(radioButton, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                        if (j == 0) {
+                            radioButton.setChecked(true);
+                        }
+                        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) radioButton.getLayoutParams();
+
+                        layoutParams.setMargins(0, 0, 10, 0);
+
+                        radioButton.setLayoutParams(layoutParams);
+                    }
+                }
+            }
+
+
+
+
+            if ("颜色".equals(type_name)) {
+                shoppingcolors.setVisibility(View.VISIBLE);
+                List<AllGoodsInfoBean.DataBean.ItemsBean.SkuInfoBean.AttrListBean> attrList = skuInfoBean.getAttrList();
+                for (int j = 0; j < attrList.size(); j++) {
+                    RadioButton radioButton = new RadioButton(getApplicationContext());
+                    if (radioButton == null) {
+                        return;
+                    } else {
+                        SetRadioButtonView(i, attrList, j, radioButton);
+
+                        colorcontent.addView(radioButton, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                        if (j == 0) {
+                            radioButton.setChecked(true);
+                        }
+                        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) radioButton.getLayoutParams();
+
+                        layoutParams.setMargins(0, 0, 10, 0);
+
+                        radioButton.setLayoutParams(layoutParams);
+                    }
+                }
+            }
+
+
+
+
+            if ("尺寸".equals(type_name)) {
+                shoppingsize.setVisibility(View.VISIBLE);
+                List<AllGoodsInfoBean.DataBean.ItemsBean.SkuInfoBean.AttrListBean> attrList = skuInfoBean.getAttrList();
+                for (int j = 0; j < attrList.size(); j++) {
+                    RadioButton radioButton = new RadioButton(getApplicationContext());
+                    if (radioButton == null) {
+                        return;
+                    } else {
+                        SetRadioButtonView(i, attrList, j, radioButton);
+
+                        sizecontent.addView(radioButton, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                        if (j == 0) {
+                            radioButton.setChecked(true);
+                        }
+                        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) radioButton.getLayoutParams();
+
+                        layoutParams.setMargins(0, 0, 10, 0);
+
+                        radioButton.setLayoutParams(layoutParams);
+                    }
+                }
+            }
+
+
+
+            if ("服装".equals(type_name)) {
+                shoppingclothing.setVisibility(View.VISIBLE);
+                List<AllGoodsInfoBean.DataBean.ItemsBean.SkuInfoBean.AttrListBean> attrList = skuInfoBean.getAttrList();
+                for (int j = 0; j < attrList.size(); j++) {
+                    RadioButton radioButton = new RadioButton(getApplicationContext());
+                    if (radioButton == null) {
+                        return;
+                    } else {
+                        SetRadioButtonView(i, attrList, j, radioButton);
+
+                        clothingcontent.addView(radioButton, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                        if (j == 0) {
+                            radioButton.setChecked(true);
+                        }
+                        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) radioButton.getLayoutParams();
+
+                        layoutParams.setMargins(0, 0, 10, 0);
+
+                        radioButton.setLayoutParams(layoutParams);
+                    }
+                }
+            }
+
+
+
+            if ("鞋".equals(type_name)) {
+                shoppingshoes.setVisibility(View.VISIBLE);
+                List<AllGoodsInfoBean.DataBean.ItemsBean.SkuInfoBean.AttrListBean> attrList = skuInfoBean.getAttrList();
+                for (int j = 0; j < attrList.size(); j++) {
+                    RadioButton radioButton = new RadioButton(getApplicationContext());
+                    if (radioButton == null) {
+                        return;
+                    } else {
+                        SetRadioButtonView(i, attrList, j, radioButton);
+
+                        shoescontent.addView(radioButton, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                        if (j == 0) {
+                            radioButton.setChecked(true);
+                        }
+                        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) radioButton.getLayoutParams();
+
+                        layoutParams.setMargins(0, 0, 10, 0);
+
+                        radioButton.setLayoutParams(layoutParams);
+                    }
+                }
+            }
+
+
+
+
+        }
+
+    }
+
+    private void SetRadioButtonView(int i, List<AllGoodsInfoBean.DataBean.ItemsBean.SkuInfoBean.AttrListBean> attrList, int j, RadioButton radioButton) {
+        //设置button为null
+        radioButton.setButtonDrawable(new ColorDrawable(Color.TRANSPARENT));
+        radioButton.setGravity(Gravity.CENTER);
+        //设置背景选择器
+        radioButton.setBackgroundResource(R.drawable.radio_group_selector);
+
+        radioButton.setWidth(150);
+        radioButton.setHeight(100);
+
+        radioButton.setText(attrList.get(j).getAttr_name());
+        radioButton.setTextColor(Color.WHITE);
+        radioButton.setPadding(2, 1, 2, 1);
+        //点击事件
+        radioButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
     }
 
     @OnClick({R.id.brand_goods_btn1, R.id.brand_goods_btn2, R.id.navigation_back, R.id.navigation_cart, R.id.ic_custom_service, R.id.add_shoppingcart, R.id.buying, R.id.shardSDK})
@@ -205,11 +559,12 @@ public class AllGoodsInfoActivity extends AppCompatActivity {
             case R.id.ic_custom_service:
                 break;
             case R.id.add_shoppingcart:
+                window.showAtLocation(activityAllGoodsInfo, Gravity.CENTER, 0, 0);
                 break;
             case R.id.buying:
                 break;
             case R.id.shardSDK:
-               showShare();
+                popupWindow.showAtLocation(activityAllGoodsInfo, Gravity.CENTER, 0, 0);
                 break;
         }
     }
@@ -239,5 +594,29 @@ public class AllGoodsInfoActivity extends AppCompatActivity {
 
 // 启动分享GUI
         oks.show(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.textview1:
+                showShare();
+                break;
+            case R.id.textview2:
+                showShare();
+                break;
+            case R.id.textview3:
+                showShare();
+                break;
+            case R.id.textview4:
+                showShare();
+                break;
+            case R.id.textview5:
+                popupWindow.dismiss();
+                break;
+            case R.id.shopping_back:
+                window.dismiss();
+                break;
+        }
     }
 }

@@ -13,7 +13,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import atguigu.com.actualproject.R;
-import atguigu.com.actualproject.all_goods.AllGoodsFragment;
+import atguigu.com.actualproject.recommend.RecommendFragment;
 import atguigu.com.actualproject.base.BaseFragment;
 import atguigu.com.actualproject.expert.ExpertFragment;
 import atguigu.com.actualproject.magazine.MagazineFragment;
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         fragments.add(new ShoppingFragment());
         fragments.add(new MagazineFragment());
         fragments.add(new ExpertFragment());
-        fragments.add(new AllGoodsFragment());
+        fragments.add(new RecommendFragment());
         fragments.add(new PersonalCenterFragment());
     }
 

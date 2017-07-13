@@ -1,4 +1,4 @@
-package atguigu.com.actualproject.all_goods;
+package atguigu.com.actualproject.recommend;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -13,7 +13,7 @@ import butterknife.InjectView;
  * Created by sun on 2017/7/6.
  */
 
-public class AllGoodsFragment extends BaseFragment {
+public class RecommendFragment extends BaseFragment {
     @InjectView(R.id.title_image)
     ImageView titleImage;
     @InjectView(R.id.title_back)
