@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginRight="15dp"
+    android:layout_centerVertical="true"
+    android:orientation="vertical">
+
+   <de.hdodenhof.circleimageview.CircleImageView
+       android:id="@+id/author_image"
+       android:layout_width="60dp"
+       android:layout_height="60dp" />
+
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/author_image"
+        android:id="@+id/author_textname"
+        android:text="名字"
+        android:textSize="16sp"
+        android:textColor="#474748"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/author_image"
+        android:layout_below="@id/author_textname"
+        android:textColor="#9c9c9c"
+        android:textSize="12sp"
+        android:text="简介"
+        android:lines="1"
+        android:ellipsize="end"
+        android:id="@+id/author_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:background="#cbced1"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+</RelativeLayout>

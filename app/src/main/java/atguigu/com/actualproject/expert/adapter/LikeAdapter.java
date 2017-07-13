@@ -1,6 +1,7 @@
 package atguigu.com.actualproject.expert.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import atguigu.com.actualproject.R;
+import atguigu.com.actualproject.expert.RecommendAndLikeActivity;
 import atguigu.com.actualproject.expert.bean.LikeBean;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -24,11 +26,13 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.SingleViewHold
     private final Context context;
     private final LayoutInflater single;
     private final List<LikeBean.DataBean.ItemsBean.GoodsBean> datas;
+    private final LikeBean.DataBean.ItemsBean dataBean;
 
 
-    public LikeAdapter(Context context, List<LikeBean.DataBean.ItemsBean.GoodsBean> items) {
+    public LikeAdapter(Context context, List<LikeBean.DataBean.ItemsBean.GoodsBean> items, LikeBean.DataBean.ItemsBean itemsBean) {
         this.context = context;
         this.datas = items;
+        this.dataBean=itemsBean;
         this.single = LayoutInflater.from(context);
     }
 
@@ -44,6 +48,8 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.SingleViewHold
         Glide.with(context)
                 .load(goodsBean.getGoods_image())
                 .into(holder.singleImage);
+        holder.setListener(goodsBean.getGoods_image(),goodsBean.getGoods_name(),goodsBean.getPrice(),dataBean.getUser_name(),dataBean.getUser_image().getOrig(),dataBean.getLike_count(),dataBean.getUser_id(),dataBean.getUser_desc());
+
     }
 
     @Override
@@ -52,11 +58,31 @@ public class LikeAdapter extends RecyclerView.Adapter<LikeAdapter.SingleViewHold
     }
 
    class SingleViewHolder extends RecyclerView.ViewHolder {
-        @InjectView(R.id.single_Image)
+       private final View view;
+       @InjectView(R.id.single_Image)
         ImageView singleImage;
         public SingleViewHolder(View inflate) {
             super(inflate);
+            this.view=inflate;
             ButterKnife.inject(this,inflate);
         }
-    }
+
+       public void setListener(final String goods_image, final String goods_name, final String price, final String user_name, final String mid, final String like_count, final String user_id, final String user_desc) {
+           view.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   Intent intent=new Intent(context,RecommendAndLikeActivity.class);
+                   intent.putExtra("IMAGE",goods_image);
+                   intent.putExtra("GOODNAME",goods_name);
+                   intent.putExtra("PRICE",price);
+                   intent.putExtra("USERNAME",user_name);
+                   intent.putExtra("MID",mid);
+                   intent.putExtra("FAVOR",like_count);
+                   intent.putExtra("ID",user_id);
+                   intent.putExtra("DESC",user_desc);
+                   context.startActivity(intent);
+               }
+           });
+       }
+   }
 }

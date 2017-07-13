@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_recommend_and_like"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#202428"
+    android:orientation="vertical"
+    tools:context="atguigu.com.actualproject.expert.RecommendAndLikeActivity">
+
+    <include layout="@layout/title_bar" />
+
+    <ScrollView
+        android:id="@+id/expert_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/expert_ll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.youth.banner.Banner
+                android:layout_margin="15dp"
+                android:id="@+id/exoert_banner"
+                android:layout_width="wrap_content"
+                android:layout_height="500dp">
+
+            </com.youth.banner.Banner>
+
+            <TextView
+                android:id="@+id/goods_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:text="书名"
+                android:textColor="#cccccc"
+                android:textSize="16sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/expert_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_centerVertical="true"
+                    android:text="￥"
+                    android:textColor="#678cb4"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:id="@+id/expert_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_toRightOf="@id/expert_textview"
+                    android:text="1999.0"
+                    android:textColor="#678cb4"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15dp">
+
+                    <ImageView
+                        android:id="@+id/expert_favor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_favor_no_data" />
+
+                    <TextView
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/expert_textview3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2"
+                        android:textColor="#678cb4" />
+
+                </LinearLayout>
+            </RelativeLayout>
+
+          <Button
+              android:id="@+id/expert_link"
+              android:text="LINK"
+              android:layout_marginLeft="15dp"
+              android:textColor="#cccccc"
+              android:background="#444950"
+              android:layout_width="50dp"
+              android:layout_height="25dp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_margin="15dp"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/userImage"
+                    android:clickable="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp" />
+
+                <TextView
+                    android:id="@+id/usename"
+                    android:textColor="#678cb4"
+                    android:textSize="15sp"
+                    android:text="作家名字"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:textColor="#cccccc"
+                    android:textSize="12sp"
+                    android:text="推荐"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#44596f" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/comment_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </android.support.v7.widget.RecyclerView>
+
+            <Button
+                android:id="@+id/btn_writer"
+                android:layout_margin="20dp"
+                android:textColor="#cccccc"
+                android:background="#444950"
+                android:drawableLeft="@drawable/write_sth_icon"
+                android:text="写点什么"
+                android:paddingLeft="130dp"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="35dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

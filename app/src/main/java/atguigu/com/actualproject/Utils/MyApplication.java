@@ -1,14 +1,15 @@
 package atguigu.com.actualproject.Utils;
 
-import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
+
+import com.mob.MobApplication;
 
 /**
  * Created by sun on 2017/7/5.
  */
 
-public class MyApplication extends Application {
+public class MyApplication extends MobApplication {
 
 
     private static Context context;
@@ -21,6 +22,7 @@ public class MyApplication extends Application {
         handler = new Handler();
         pid = android.os.Process.myPid();
         context = this;
+
     }
 
     public static Context getContext() {
@@ -33,4 +35,6 @@ public class MyApplication extends Application {
     public static int getPid() {
         return pid;
     }
+
+
 }

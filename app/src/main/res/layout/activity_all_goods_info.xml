@@ -150,6 +150,7 @@
                     android:textColor="#678cb4" />
 
                 <ImageView
+                    android:id="@+id/shardSDK"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"

@@ -35,4 +35,17 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="magazineStyle" >
+        <!-- Customize your theme here. -->
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">80dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@drawable/magazine_textcolor</item>
+        <item name="android:button">@null</item>
+        <item name="android:padding">15dp</item>
+        <item name="android:drawablePadding">2dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
 </resources>

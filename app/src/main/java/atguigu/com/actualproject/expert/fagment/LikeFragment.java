@@ -114,9 +114,10 @@ public class LikeFragment extends BaseFragment {
 
         if(!isloadMore){
             goods = likeBean.getData().getItems().getGoods();
+            LikeBean.DataBean.ItemsBean items = likeBean.getData().getItems();
 
             if(goods!=null && goods.size()>0){
-                adapter=new LikeAdapter(context,goods);
+                adapter=new LikeAdapter(context,goods,items);
                 recyclerviewItem.setAdapter(adapter);
 
             }

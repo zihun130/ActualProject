@@ -112,9 +112,10 @@ public class RecommendFragment extends BaseFragment {
 
         if(!isloadMore){
             goods = recommendBean.getData().getItems().getGoods();
+            RecommendBean.DataBean.ItemsBean items = recommendBean.getData().getItems();
 
             if (goods != null && goods.size() > 0) {
-                adapter = new RecommendAdapter(context, goods);
+                adapter = new RecommendAdapter(context, goods,items);
                 recyclerviewItem.setAdapter(adapter);
             }
         }else {
