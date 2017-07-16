@@ -1,5 +1,6 @@
 package atguigu.com.actualproject.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -65,6 +66,7 @@ public class GoodsInfoActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.left_in,R.anim.right_out);
                 break;
             case R.id.title_shoppingcart:
+                startActivity(new Intent(this,CartShoppingActivity.class));
                 break;
         }
     }

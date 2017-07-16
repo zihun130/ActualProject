@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -42,7 +43,7 @@ public class HtmlActivity extends AppCompatActivity implements View.OnClickListe
     @InjectView(R.id.title_forward)
     ImageView titleForward;
     @InjectView(R.id.title_favor_select)
-    ImageView titleFavorSelect;
+    CheckBox titleFavorSelect;
     @InjectView(R.id.title_bar)
     RelativeLayout titleBar;
     private String topic_name;

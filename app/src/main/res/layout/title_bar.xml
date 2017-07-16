@@ -62,14 +62,24 @@
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <ImageView
-        android:id="@+id/title_favor_select"
-        android:background="@drawable/favor_select"
+
+    <TextView
+        android:id="@+id/edit_deleter"
         android:visibility="gone"
-        android:clickable="true"
+        android:textColor="#9b9b9c"
+        android:text="编辑"
+        android:textSize="14dp"
         android:layout_marginRight="10dp"
-        android:layout_toLeftOf="@id/title_forward"
+        android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <CheckBox
+        android:id="@+id/title_favor_select"
+        android:visibility="gone"
+        android:button="@drawable/favor_select"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@id/title_forward"
+        android:layout_width="20dp"
+        android:layout_height="20dp" />
 
 </RelativeLayout>

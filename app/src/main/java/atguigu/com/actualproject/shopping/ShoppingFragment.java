@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import atguigu.com.actualproject.R;
-import atguigu.com.actualproject.Utils.UIUtils;
+import atguigu.com.actualproject.activity.CartShoppingActivity;
 import atguigu.com.actualproject.base.BaseFragment;
 import atguigu.com.actualproject.shopping.adapter.ShoppingAdapter;
 import atguigu.com.actualproject.shopping.pagers.BrandPager;
@@ -110,7 +110,7 @@ public class ShoppingFragment extends BaseFragment {
                 startActivity(new Intent(context,SearchActivity.class));
                 break;
             case R.id.title_shoppingcart:
-                UIUtils.showToast("购物车");
+                startActivity(new Intent(context, CartShoppingActivity.class));
                 break;
         }
     }
