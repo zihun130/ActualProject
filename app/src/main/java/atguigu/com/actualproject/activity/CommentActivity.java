@@ -1,5 +1,8 @@
 package atguigu.com.actualproject.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,6 +29,7 @@ import atguigu.com.actualproject.adapter.HotCommentAdapter;
 import atguigu.com.actualproject.adapter.NormalCommentAdapter;
 import atguigu.com.actualproject.bean.CommentBean;
 import atguigu.com.actualproject.recommend.bean.RecomBean;
+import atguigu.com.actualproject.zxing.encoding.EncodingHandler;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -151,6 +155,7 @@ public class CommentActivity extends AppCompatActivity {
 
     private void inittitle() {
         titleBack.setVisibility(View.VISIBLE);
+        titleForward.setVisibility(View.VISIBLE);
         titleText.setText("评论");
     }
 
@@ -268,13 +273,37 @@ public class CommentActivity extends AppCompatActivity {
         normalComment.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
 
-    @OnClick({R.id.title_back, R.id.ll_share})
+    @OnClick({R.id.title_back, R.id.ll_share,R.id.title_forward})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.title_back:
                 finish();
                 break;
             case R.id.ll_share:
+                break;
+            case R.id.title_forward:
+                //生成二维码
+                try {
+                    //String code =JSON.toJSONString(purl + uid + surl);
+                    Bitmap qrCode = EncodingHandler.createQRCode(recommends.getShare_url(), 220);
+                    ImageView imageView = new ImageView(this);
+                    imageView.setImageBitmap(qrCode);
+
+                    new AlertDialog.Builder(this)
+                                .setTitle("生成的二维码")
+                                .setView(imageView)
+                                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                    
+                                    }
+                                })
+                                .setNegativeButton("取消", null)
+                                .show();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 break;
         }
     }

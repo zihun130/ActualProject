@@ -80,7 +80,7 @@ public class CartRecyclerAdapter extends RecyclerView.Adapter<CartRecyclerAdapte
     public void onBindViewHolder(final CartViewHolder holder, int position) {
         final InfoBean infoBean = datas.get(position);
 
-        holder.checkboxAll.setChecked(infoBean.isChecked());
+        holder.checkboxNone.setChecked(infoBean.isChecked());
 
         Glide.with(context)
                 .load(infoBean.getImageUrl())
@@ -89,7 +89,6 @@ public class CartRecyclerAdapter extends RecyclerView.Adapter<CartRecyclerAdapte
         holder.goodsinfoContent.setText(infoBean.getGoodsInfo());
         holder.priceText.setText(infoBean.getPrice());
         holder.countText.setText(infoBean.getCount() + "");
-        holder.checkboxAll.setChecked(true);
 
         holder.setListener(position);
     }
@@ -133,37 +132,10 @@ public class CartRecyclerAdapter extends RecyclerView.Adapter<CartRecyclerAdapte
         return datas.size();
     }
 
-    public void checkAll_none(boolean isChecked) {
-        if (datas != null && datas.size() > 0) {
-            for (int i = 0; i < datas.size(); i++) {
-                InfoBean infoBean = datas.get(i);
-                infoBean.setChecked(isChecked);
-                notifyItemChanged(i);
-            }
-        } else {
-            checkboxAll.setChecked(false);
-        }
-    }
-
-    public void checkAll() {
-        if (datas != null && datas.size() > 0) {
-            for (int i = 0; i < datas.size(); i++) {
-                InfoBean infoBean = datas.get(i);
-                if (!infoBean.isChecked()) {
-                    checkboxAll.setChecked(false);
-                }
-            }
-            checkboxAll.setChecked(true);
-        } else {
-            checkboxAll.setChecked(false);
-
-        }
-    }
-
 
     class CartViewHolder extends RecyclerView.ViewHolder {
-        @InjectView(R.id.checkbox_all)
-        CheckBox checkboxAll;
+        @InjectView(R.id.checkbox_none)
+        CheckBox checkboxNone;
         @InjectView(R.id.goodsinfo_image)
         ImageView goodsinfoImage;
         @InjectView(R.id.goodsinfo_name)
@@ -186,6 +158,24 @@ public class CartRecyclerAdapter extends RecyclerView.Adapter<CartRecyclerAdapte
         public CartViewHolder(View view) {
             super(view);
             ButterKnife.inject(this, view);
+
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //状态取反
+                    InfoBean infoBean = datas.get(getLayoutPosition());
+                    infoBean.setChecked(!infoBean.isChecked());
+
+                    //刷新适配器
+                    notifyItemChanged(getLayoutPosition());
+                    //重新显示总价格
+                    showTotalPrice();
+                    //校验是否全选
+                    checkAll();
+                }
+            });
+
 
             editDeleter.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -211,4 +201,42 @@ public class CartRecyclerAdapter extends RecyclerView.Adapter<CartRecyclerAdapte
             });
         }
     }
+
+
+    public void checkAll_none(boolean isChecked) {
+        if (datas != null && datas.size() > 0) {
+            for (int i = 0; i < datas.size(); i++) {
+                InfoBean infoBean = datas.get(i);
+                infoBean.setChecked(isChecked);
+                notifyItemChanged(i);
+            }
+        } else {
+            checkboxAll.setChecked(false);
+        }
+    }
+
+    public void checkAll() {
+        if (datas != null && datas.size() > 0) {
+
+            int number=0;
+
+            for (int i = 0; i < datas.size(); i++) {
+                InfoBean infoBean = datas.get(i);
+                if (!infoBean.isChecked()) {
+                    checkboxAll.setChecked(false);
+                }else {
+                    number++;
+                }
+            }
+            if(number ==datas.size()){
+                checkboxAll.setChecked(true);
+            }
+        } else {
+            checkboxAll.setChecked(false);
+
+        }
+    }
+
+
+
 }

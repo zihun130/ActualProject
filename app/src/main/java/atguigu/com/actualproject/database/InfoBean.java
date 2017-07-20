@@ -12,7 +12,7 @@ public class InfoBean {
     private String Price;
     private int    Count;
     private String GoodsInfo;
-    private boolean isChecked;
+    private boolean isChecked=true;
 
 
     public boolean isChecked() {

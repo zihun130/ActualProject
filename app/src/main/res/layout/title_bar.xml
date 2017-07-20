@@ -1,85 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     android:id="@+id/title_bar"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
     android:background="#15171a"
-    android:gravity="center_vertical"
-    android:layout_height="40dp">
+    android:gravity="center_vertical">
+
+
+    <ImageButton
+        android:id="@+id/sao_sao"
+        android:visibility="gone"
+        android:layout_marginLeft="10dp"
+        android:layout_width="30dp"
+        android:background="#15171a"
+        android:layout_height="30dp"
+        android:src="@drawable/scan"/>
 
     <ImageView
         android:id="@+id/title_image"
-        android:layout_marginLeft="10dp"
-        android:visibility="gone"
-        android:src="@drawable/abc_ic_search_api_mtrl_alpha"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/abc_ic_search_api_mtrl_alpha"
+        android:visibility="gone" />
+
     <ImageView
         android:id="@+id/title_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:src="@drawable/actionbar_navigation_back"
-        android:visibility="gone"
-        android:layout_marginLeft="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/title_date"
-        android:layout_marginLeft="10dp"
-        android:visibility="gone"
-        android:text="Today"
-        android:textColor="#063ea7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:visibility="gone" />
 
     <TextView
-        android:text="商 店"
-        android:layout_centerHorizontal="true"
-        android:textColor="#ffffff"
-        android:textSize="16sp"
+        android:id="@+id/title_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="Today"
+        android:textColor="#063ea7"
+        android:visibility="gone" />
+
+    <TextView
         android:id="@+id/title_text"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="商 店"
+        android:textColor="#ffffff"
+        android:textSize="16sp" />
 
     <ImageView
         android:id="@+id/title_shoppingcart"
-        android:layout_marginRight="10dp"
-        android:layout_alignParentRight="true"
-        android:visibility="gone"
-        android:src="@drawable/actionbar_navigation_cart"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/actionbar_navigation_cart"
+        android:visibility="gone" />
+
     <ImageView
         android:id="@+id/title_select"
-        android:src="@drawable/title_seclect"
-        android:visibility="gone"
-        android:layout_marginRight="10dp"
-        android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/title_seclect"
+        android:visibility="gone" />
+
     <ImageView
         android:id="@+id/title_forward"
-        android:src="@drawable/forward"
-        android:visibility="gone"
-        android:layout_marginRight="10dp"
-        android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/forward"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/edit_deleter"
-        android:visibility="gone"
-        android:textColor="#9b9b9c"
-        android:text="编辑"
-        android:textSize="14dp"
-        android:layout_marginRight="10dp"
-        android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:text="编辑"
+        android:textColor="#9b9b9c"
+        android:textSize="14dp"
+        android:visibility="gone" />
+
     <CheckBox
         android:id="@+id/title_favor_select"
-        android:visibility="gone"
-        android:button="@drawable/favor_select"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_marginRight="10dp"
         android:layout_toLeftOf="@id/title_forward"
-        android:layout_width="20dp"
-        android:layout_height="20dp" />
+        android:button="@drawable/favor_select"
+        android:visibility="gone" />
 
 </RelativeLayout>
