@@ -5,6 +5,9 @@ import android.os.Handler;
 
 import com.mob.MobApplication;
 
+import org.xutils.BuildConfig;
+import org.xutils.x;
+
 import atguigu.com.actualproject.database.HelperManager;
 import cn.jpush.android.api.JPushInterface;
 
@@ -31,6 +34,8 @@ public class MyApplication extends MobApplication {
         JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
         JPushInterface.init(this);     		// 初始化 JPush
 
+        x.Ext.init(this);
+        x.Ext.setDebug(BuildConfig.DEBUG);
     }
 
     public static Context getContext() {
