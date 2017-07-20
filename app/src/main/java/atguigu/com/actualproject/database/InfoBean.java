@@ -9,7 +9,7 @@ public class InfoBean {
     private String GoodsName;
     private String GoodsDesc;
     private String ImageUrl;
-    private double Price;
+    private String Price;
     private int    Count;
     private String GoodsInfo;
     private boolean isChecked;
@@ -48,11 +48,11 @@ public class InfoBean {
         ImageUrl = imageUrl;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return Price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         Price = price;
     }
 

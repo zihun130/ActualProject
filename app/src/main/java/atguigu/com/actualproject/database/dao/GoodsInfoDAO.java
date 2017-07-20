@@ -18,12 +18,6 @@ import atguigu.com.actualproject.database.table.GoodsInfoTable;
 
 public class GoodsInfoDAO {
 
-    private GoodsInfoDAO(){}
-    public static GoodsInfoDAO instance=new GoodsInfoDAO();
-    public static GoodsInfoDAO getInstance(){
-        return instance;
-    }
-
     private DBHelper dbHelper;
     public GoodsInfoDAO(Context context){
         this.dbHelper = new DBHelper(context);
@@ -44,7 +38,7 @@ public class GoodsInfoDAO {
           infoBean.setGoodsName(cursor.getString(cursor.getColumnIndex(GoodsInfoTable.NAME)));
           infoBean.setGoodsDesc(cursor.getString(cursor.getColumnIndex(GoodsInfoTable.DESC)));
           infoBean.setImageUrl(cursor.getString(cursor.getColumnIndex(GoodsInfoTable.IMAGEURL)));
-          infoBean.setPrice(cursor.getDouble(cursor.getColumnIndex(GoodsInfoTable.PRICE)));
+          infoBean.setPrice(cursor.getString(cursor.getColumnIndex(GoodsInfoTable.PRICE)));
           infoBean.setCount(cursor.getInt(cursor.getColumnIndex(GoodsInfoTable.COUNT)));
           infoBean.setGoodsInfo(cursor.getString(cursor.getColumnIndex(GoodsInfoTable.GOODSINFO)));
 

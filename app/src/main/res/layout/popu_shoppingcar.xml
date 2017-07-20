@@ -376,7 +376,7 @@
                     app:minvalue="0"
                     app:numberAddBackground="@drawable/add"
                     app:numberSubBackground="@drawable/sub"
-                    app:value="1"></atguigu.com.actualproject.view.AddSubView>
+                    app:value="0"></atguigu.com.actualproject.view.AddSubView>
             </LinearLayout>
 
         </LinearLayout>

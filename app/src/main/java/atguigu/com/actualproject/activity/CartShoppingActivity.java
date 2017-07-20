@@ -2,6 +2,7 @@ package atguigu.com.actualproject.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -15,8 +16,8 @@ import java.util.List;
 
 import atguigu.com.actualproject.R;
 import atguigu.com.actualproject.adapter.CartRecyclerAdapter;
+import atguigu.com.actualproject.database.HelperManager;
 import atguigu.com.actualproject.database.InfoBean;
-import atguigu.com.actualproject.database.dao.GoodsInfoDAO;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -90,11 +91,6 @@ public class CartShoppingActivity extends AppCompatActivity {
     @InjectView(R.id.cart_btn)
     Button cartBtn;
 
-    //编辑状态
-    private static final int ACTION_EDIT = 1;
-    //完成状态
-    private static final int ACTION_COMPLETE = 2;
-
     private List<InfoBean> allGoodsContent;
     private CartRecyclerAdapter adapter;
 
@@ -116,49 +112,29 @@ public class CartShoppingActivity extends AppCompatActivity {
 
     private void initData() {
 
+        allGoodsContent = HelperManager.getInstance().getGoodsInfoDAO().getAllGoodsContent();
 
-        allGoodsContent = GoodsInfoDAO.getInstance().getAllGoodsContent();
-
-        adapter = new CartRecyclerAdapter(this, allGoodsContent,allPriceText,checkboxAll,editDeleter);
+        adapter = new CartRecyclerAdapter(this, allGoodsContent, allPriceText, checkboxAll, editDeleter);
         cartRecyclerview.setAdapter(adapter);
+        cartRecyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
 
 
-    @OnClick({R.id.title_back, R.id.edit_deleter, R.id.cart_btn})
+    @OnClick({R.id.title_back, R.id.cart_btn,R.id.checkbox_all})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.title_back:
                 finish();
                 break;
-            case R.id.edit_deleter:
-                int tag= (int) editDeleter.getTag();
-                if(tag==ACTION_EDIT){
-                    showDelete();
-                }else {
-                    hideDelete();
-                }
-                break;
             case R.id.cart_btn:
                 break;
+            case R.id.checkbox_all:
+                boolean checked = checkboxAll.isChecked();
+                adapter.checkAll_none(checked);
+                adapter.showTotalPrice();
+                break;
+
         }
     }
 
-    private void hideDelete() {
-        editDeleter.setText("编辑");
-        editDeleter.setTag(ACTION_EDIT);
-        if(adapter!=null){
-            //改为非勾选
-
-        }
-        adapter.showTotalPrice();
-    }
-
-    private void showDelete() {
-        editDeleter.setText("完成");
-        editDeleter.setTag(ACTION_COMPLETE);
-        if(adapter != null){
-
-        }
-        adapter.showTotalPrice();
-    }
 }

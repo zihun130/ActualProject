@@ -53,7 +53,7 @@ public class AddSubView extends LinearLayout {
         this.minvalue = minvalue;
     }
 
-    private int value=1;
+    private int value=0;
     private int minvalue=0;
     private int maxvalue=100;
 

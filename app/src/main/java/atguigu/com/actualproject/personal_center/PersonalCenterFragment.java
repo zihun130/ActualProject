@@ -36,7 +36,7 @@ public class PersonalCenterFragment extends BaseFragment {
 
     @Override
     public void initTitle() {
-       titleText.setText("个人中心");
+       titleText.setText("哔哩哔哩");
     }
 
     @Override

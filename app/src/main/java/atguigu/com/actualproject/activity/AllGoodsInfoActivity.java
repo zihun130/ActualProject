@@ -13,6 +13,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -37,8 +38,8 @@ import atguigu.com.actualproject.Utils.DensityUtil;
 import atguigu.com.actualproject.Utils.GlidImageLoader;
 import atguigu.com.actualproject.Utils.UIUtils;
 import atguigu.com.actualproject.bean.AllGoodsInfoBean;
+import atguigu.com.actualproject.database.HelperManager;
 import atguigu.com.actualproject.database.InfoBean;
-import atguigu.com.actualproject.database.dao.GoodsInfoDAO;
 import atguigu.com.actualproject.view.AddSubView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -154,15 +155,14 @@ public class AllGoodsInfoActivity extends AppCompatActivity implements View.OnCl
     private RadioGroup shoescontent;
     private LinearLayout counts;
     private AddSubView shoppingcountcontent;
-    private CharSequence sizeText;
-    private CharSequence countText;
-    private CharSequence capacityText;
-    private CharSequence typeText;
-    private CharSequence shoesText;
-    private CharSequence colorText;
-    private CharSequence clothingText;
+    private String sizeText;
+    private String countText;
+    private String capacityText;
+    private String typeText;
+    private String shoesText;
+    private String colorText;
+    private String clothingText;
     private String string;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -303,7 +303,7 @@ public class AllGoodsInfoActivity extends AppCompatActivity implements View.OnCl
 
     }
 
-    private void setGoodsData(AllGoodsInfoBean.DataBean.ItemsBean items) {
+    private void setGoodsData(final AllGoodsInfoBean.DataBean.ItemsBean items) {
         List<String> images_item = items.getImages_item();
 
 
@@ -350,25 +350,42 @@ public class AllGoodsInfoActivity extends AppCompatActivity implements View.OnCl
         shoppingcontent.setText(items.getGoods_name());
         shoppingprice.setText(items.getPrice());
 
-
-        List<AllGoodsInfoBean.DataBean.ItemsBean.SkuInfoBean> sku_info = items.getSku_info();
-
-
         final ArrayList<String> arrayList = new ArrayList<>();
+        List<AllGoodsInfoBean.DataBean.ItemsBean.SkuInfoBean> sku_info = items.getSku_info();
 
         for (int i = 0; i < sku_info.size(); i++) {
             AllGoodsInfoBean.DataBean.ItemsBean.SkuInfoBean skuInfoBean = sku_info.get(i);
             String type_name = skuInfoBean.getType_name();
             if ("数量".equals(type_name)) {
                 counts.setVisibility(View.VISIBLE);
-                List<AllGoodsInfoBean.DataBean.ItemsBean.SkuInfoBean.AttrListBean> attrList = skuInfoBean.getAttrList();
+                final List<AllGoodsInfoBean.DataBean.ItemsBean.SkuInfoBean.AttrListBean> attrList = skuInfoBean.getAttrList();
                 for (int j = 0; j < attrList.size(); j++) {
                     RadioButton radioButton = new RadioButton(getApplicationContext());
                     if (radioButton == null) {
                         return;
                     } else {
+                        //设置button为null
+                        radioButton.setButtonDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        radioButton.setGravity(Gravity.CENTER);
+                        //设置背景选择器
+                        radioButton.setBackgroundResource(R.drawable.radio_group_selector);
 
-                        SetRadioButtonView(attrList, j, radioButton);
+                        radioButton.setWidth(DensityUtil.dip2px(this, 100));
+                        radioButton.setHeight(DensityUtil.dip2px(this, 100));
+
+                        radioButton.setText(attrList.get(j).getAttr_name());
+                        radioButton.setTextColor(Color.WHITE);
+                        radioButton.setPadding(2, 1, 2, 1);
+                        radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                            @Override
+                            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                if(isChecked) {
+                                    countText = "数量:"+buttonView.getText().toString();
+                                    arrayList.add(countText);
+                                    Log.e("TAG",countText);
+                                }
+                            }
+                        });
                         countcontent.addView(radioButton, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                         //必须在添加进RadioGroup之后设置默认选中
                         if (j == 0) {
@@ -377,28 +394,14 @@ public class AllGoodsInfoActivity extends AppCompatActivity implements View.OnCl
                         //设置RadioButton在RadioGroup中的位置
                         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) radioButton.getLayoutParams();
 
-                        layoutParams.setMargins(0, 0, DensityUtil.dip2px(this,10), 0);
+                        layoutParams.setMargins(0, 0, DensityUtil.dip2px(this, 10), 0);
 
                         radioButton.setLayoutParams(layoutParams);
-
 
                     }
                 }
 
-
-                countcontent.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(RadioGroup group, int checkedId) {
-                        RadioButton tempButton = (RadioButton) group.getChildAt(checkedId-1);
-                        // 通过RadioGroup的findViewById方法，找到ID为checkedID的RadioButton
-                        // 以下就可以对这个RadioButton进行处理了
-                        countText = tempButton.getText().toString().trim();
-                        arrayList.add("数量:"+countText);
-                    }
-                });
-
             }
-
 
 
             if ("容量".equals(type_name)) {
@@ -409,7 +412,28 @@ public class AllGoodsInfoActivity extends AppCompatActivity implements View.OnCl
                     if (radioButton == null) {
                         return;
                     } else {
-                        SetRadioButtonView(attrList, j, radioButton);
+                        //设置button为null
+                        radioButton.setButtonDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        radioButton.setGravity(Gravity.CENTER);
+                        //设置背景选择器
+                        radioButton.setBackgroundResource(R.drawable.radio_group_selector);
+
+                        radioButton.setWidth(DensityUtil.dip2px(this, 100));
+                        radioButton.setHeight(DensityUtil.dip2px(this, 100));
+
+                        radioButton.setText(attrList.get(j).getAttr_name());
+                        radioButton.setTextColor(Color.WHITE);
+                        radioButton.setPadding(2, 1, 2, 1);
+                        radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                            @Override
+                            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                if(isChecked) {
+                                    capacityText ="容量:"+buttonView.getText().toString();
+                                    arrayList.add(capacityText);
+                                    Log.e("TAG",capacityText);
+                                }
+                            }
+                        });
 
                         capacitycontent.addView(radioButton, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                         if (j == 0) {
@@ -417,28 +441,14 @@ public class AllGoodsInfoActivity extends AppCompatActivity implements View.OnCl
                         }
                         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) radioButton.getLayoutParams();
 
-                        layoutParams.setMargins(0, 0, DensityUtil.dip2px(this,10), 0);
+                        layoutParams.setMargins(0, 0, DensityUtil.dip2px(this, 10), 0);
 
                         radioButton.setLayoutParams(layoutParams);
 
                     }
                 }
 
-
-                capacitycontent.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(RadioGroup group, int checkedId) {
-                        RadioButton tempButton = (RadioButton) group.getChildAt(checkedId-1);
-                        // 通过RadioGroup的findViewById方法，找到ID为checkedID的RadioButton
-                        // 以下就可以对这个RadioButton进行处理了
-                        capacityText = tempButton.getText().toString().trim();
-
-                        arrayList.add("容量:"+capacityText);
-
-                    }
-                });
             }
-
 
 
             if ("种类".equals(type_name)) {
@@ -449,7 +459,28 @@ public class AllGoodsInfoActivity extends AppCompatActivity implements View.OnCl
                     if (radioButton == null) {
                         return;
                     } else {
-                        SetRadioButtonView(attrList, j, radioButton);
+                        //设置button为null
+                        radioButton.setButtonDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        radioButton.setGravity(Gravity.CENTER);
+                        //设置背景选择器
+                        radioButton.setBackgroundResource(R.drawable.radio_group_selector);
+
+                        radioButton.setWidth(DensityUtil.dip2px(this, 100));
+                        radioButton.setHeight(DensityUtil.dip2px(this, 100));
+
+                        radioButton.setText(attrList.get(j).getAttr_name());
+                        radioButton.setTextColor(Color.WHITE);
+                        radioButton.setPadding(2, 1, 2, 1);
+                        radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                            @Override
+                            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                if(isChecked) {
+                                    typeText = "种类:"+buttonView.getText().toString();
+                                    arrayList.add(typeText);
+                                    Log.e("TAG",typeText);
+                                }
+                            }
+                        });
 
                         typecontent.addView(radioButton, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                         if (j == 0) {
@@ -457,29 +488,14 @@ public class AllGoodsInfoActivity extends AppCompatActivity implements View.OnCl
                         }
                         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) radioButton.getLayoutParams();
 
-                        layoutParams.setMargins(0, 0, DensityUtil.dip2px(this,10), 0);
+                        layoutParams.setMargins(0, 0, DensityUtil.dip2px(this, 10), 0);
 
                         radioButton.setLayoutParams(layoutParams);
-
 
                     }
                 }
 
-                typecontent.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(RadioGroup group, int checkedId) {
-                        RadioButton tempButton = (RadioButton) group.getChildAt(checkedId-1);
-                        // 通过RadioGroup的findViewById方法，找到ID为checkedID的RadioButton
-                        // 以下就可以对这个RadioButton进行处理了
-                        typeText = tempButton.getText().toString().trim();
-
-                        arrayList.add("种类:"+typeText);
-
-                    }
-                });
             }
-
-
 
 
             if ("颜色".equals(type_name)) {
@@ -490,7 +506,28 @@ public class AllGoodsInfoActivity extends AppCompatActivity implements View.OnCl
                     if (radioButton == null) {
                         return;
                     } else {
-                        SetRadioButtonView(attrList, j, radioButton);
+                        //设置button为null
+                        radioButton.setButtonDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        radioButton.setGravity(Gravity.CENTER);
+                        //设置背景选择器
+                        radioButton.setBackgroundResource(R.drawable.radio_group_selector);
+
+                        radioButton.setWidth(DensityUtil.dip2px(this, 100));
+                        radioButton.setHeight(DensityUtil.dip2px(this, 100));
+
+                        radioButton.setText(attrList.get(j).getAttr_name());
+                        radioButton.setTextColor(Color.WHITE);
+                        radioButton.setPadding(2, 1, 2, 1);
+                        radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                            @Override
+                            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                if(isChecked) {
+                                    colorText ="颜色:"+buttonView.getText().toString();
+                                    arrayList.add(colorText);
+                                    Log.e("TAG",colorText);
+                                }
+                            }
+                        });
 
                         colorcontent.addView(radioButton, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                         if (j == 0) {
@@ -498,33 +535,15 @@ public class AllGoodsInfoActivity extends AppCompatActivity implements View.OnCl
                         }
                         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) radioButton.getLayoutParams();
 
-                        layoutParams.setMargins(0, 0, DensityUtil.dip2px(this,10), 0);
+                        layoutParams.setMargins(0, 0, DensityUtil.dip2px(this, 10), 0);
 
                         radioButton.setLayoutParams(layoutParams);
-
 
 
                     }
                 }
 
-
             }
-
-            colorcontent.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(RadioGroup group, int checkedId) {
-                    RadioButton tempButton = (RadioButton) group.getChildAt(checkedId-1);
-                    Log.e("TAG",checkedId+"");
-                    // 通过RadioGroup的findViewById方法，找到ID为checkedID的RadioButton
-                    // 以下就可以对这个RadioButton进行处理了
-                    colorText = tempButton.getText().toString().trim();
-                    Log.e("TAG",colorText+"");
-                    arrayList.add("颜色:"+colorText);
-
-                }
-            });
-
-
 
 
             if ("尺寸".equals(type_name)) {
@@ -535,7 +554,28 @@ public class AllGoodsInfoActivity extends AppCompatActivity implements View.OnCl
                     if (radioButton == null) {
                         return;
                     } else {
-                        SetRadioButtonView(attrList, j, radioButton);
+                        //设置button为null
+                        radioButton.setButtonDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        radioButton.setGravity(Gravity.CENTER);
+                        //设置背景选择器
+                        radioButton.setBackgroundResource(R.drawable.radio_group_selector);
+
+                        radioButton.setWidth(DensityUtil.dip2px(this, 100));
+                        radioButton.setHeight(DensityUtil.dip2px(this, 100));
+
+                        radioButton.setText(attrList.get(j).getAttr_name());
+                        radioButton.setTextColor(Color.WHITE);
+                        radioButton.setPadding(2, 1, 2, 1);
+                        radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                            @Override
+                            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                if(isChecked) {
+                                    sizeText = "尺寸:"+buttonView.getText().toString();
+                                    arrayList.add(sizeText);
+                                    Log.e("TAG",sizeText);
+                                }
+                            }
+                        });
 
                         sizecontent.addView(radioButton, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                         if (j == 0) {
@@ -543,26 +583,14 @@ public class AllGoodsInfoActivity extends AppCompatActivity implements View.OnCl
                         }
                         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) radioButton.getLayoutParams();
 
-                        layoutParams.setMargins(0, 0, DensityUtil.dip2px(this,10), 0);
+                        layoutParams.setMargins(0, 0, DensityUtil.dip2px(this, 10), 0);
 
                         radioButton.setLayoutParams(layoutParams);
 
                     }
                 }
 
-                sizecontent.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(RadioGroup group, int checkedId) {
-                        RadioButton tempButton = (RadioButton) group.getChildAt(checkedId-1);
-                        // 通过RadioGroup的findViewById方法，找到ID为checkedID的RadioButton
-                        // 以下就可以对这个RadioButton进行处理了
-                        sizeText = tempButton.getText().toString().trim();
-
-                        arrayList.add("尺寸:"+sizeText);
-                    }
-                });
             }
-
 
 
             if ("服装".equals(type_name)) {
@@ -573,7 +601,28 @@ public class AllGoodsInfoActivity extends AppCompatActivity implements View.OnCl
                     if (radioButton == null) {
                         return;
                     } else {
-                        SetRadioButtonView(attrList, j, radioButton);
+                        //设置button为null
+                        radioButton.setButtonDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        radioButton.setGravity(Gravity.CENTER);
+                        //设置背景选择器
+                        radioButton.setBackgroundResource(R.drawable.radio_group_selector);
+
+                        radioButton.setWidth(DensityUtil.dip2px(this, 100));
+                        radioButton.setHeight(DensityUtil.dip2px(this, 100));
+
+                        radioButton.setText(attrList.get(j).getAttr_name());
+                        radioButton.setTextColor(Color.WHITE);
+                        radioButton.setPadding(2, 1, 2, 1);
+                        radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                            @Override
+                            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                if(isChecked) {
+                                    clothingText ="服装:"+buttonView.getText().toString();
+                                    arrayList.add(clothingText);
+                                    Log.e("TAG",clothingText);
+                                }
+                            }
+                        });
 
                         clothingcontent.addView(radioButton, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                         if (j == 0) {
@@ -581,7 +630,7 @@ public class AllGoodsInfoActivity extends AppCompatActivity implements View.OnCl
                         }
                         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) radioButton.getLayoutParams();
 
-                        layoutParams.setMargins(0, 0,DensityUtil.dip2px(this,10), 0);
+                        layoutParams.setMargins(0, 0, DensityUtil.dip2px(this, 10), 0);
 
                         radioButton.setLayoutParams(layoutParams);
 
@@ -589,23 +638,7 @@ public class AllGoodsInfoActivity extends AppCompatActivity implements View.OnCl
                     }
                 }
 
-                clothingcontent.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(RadioGroup group, int checkedId) {
-
-                        RadioButton tempButton = (RadioButton) group.getChildAt(checkedId-1);
-                        Log.e("TAG",checkedId+"");
-                        // 通过RadioGroup的findViewById方法，找到ID为checkedID的RadioButton
-                        // 以下就可以对这个RadioButton进行处理了
-                        clothingText = tempButton.getText().toString().trim();
-
-                        Log.e("TAG",clothingText+"");
-
-                        arrayList.add("服装:"+clothingText);
-                    }
-                });
             }
-
 
 
             if ("鞋".equals(type_name)) {
@@ -616,8 +649,28 @@ public class AllGoodsInfoActivity extends AppCompatActivity implements View.OnCl
                     if (radioButton == null) {
                         return;
                     } else {
-                        SetRadioButtonView(attrList, j, radioButton);
+                        //设置button为null
+                        radioButton.setButtonDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        radioButton.setGravity(Gravity.CENTER);
+                        //设置背景选择器
+                        radioButton.setBackgroundResource(R.drawable.radio_group_selector);
 
+                        radioButton.setWidth(DensityUtil.dip2px(this, 100));
+                        radioButton.setHeight(DensityUtil.dip2px(this, 100));
+
+                        radioButton.setText(attrList.get(j).getAttr_name());
+                        radioButton.setTextColor(Color.WHITE);
+                        radioButton.setPadding(2, 1, 2, 1);
+                        radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                            @Override
+                            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                if(isChecked) {
+                                    shoesText ="鞋:"+buttonView.getText().toString();
+                                    arrayList.add(shoesText);
+                                    Log.e("TAG",shoesText);
+                                }
+                            }
+                        });
 
                         shoescontent.addView(radioButton, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                         if (j == 0) {
@@ -626,48 +679,19 @@ public class AllGoodsInfoActivity extends AppCompatActivity implements View.OnCl
 
                         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) radioButton.getLayoutParams();
 
-                        layoutParams.setMargins(0, 0, DensityUtil.dip2px(this,10), 0);
+                        layoutParams.setMargins(0, 0, DensityUtil.dip2px(this, 10), 0);
 
                         radioButton.setLayoutParams(layoutParams);
 
-
                     }
                 }
-
-                shoescontent.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(RadioGroup group, int checkedId) {
-                        Log.e("TAG",checkedId+"");
-
-                        RadioButton tempButton = (RadioButton) group.getChildAt(checkedId-1);
-
-
-                        // 通过RadioGroup的findViewById方法，找到ID为checkedID的RadioButton
-                        // 以下就可以对这个RadioButton进行处理了
-                        shoesText = tempButton.getText().toString().trim();
-                        Log.e("TAG",shoesText+"");
-                        arrayList.add("鞋:"+shoesText);
-                    }
-                });
-
-
             }
 
 
         }
 
-       final InfoBean infoBean=new InfoBean();
 
-
-        for(int i = 0; i < arrayList.size(); i++) {
-
-            string+=arrayList.get(i);
-        }
-       infoBean.setGoodsInfo(string);
-        infoBean.setGoodsName(items.getGoods_name());
-        infoBean.setGoodsDesc(items.getGoods_desc());
-        infoBean.setImageUrl(items.getGoods_image());
-        infoBean.setPrice(Double.parseDouble(items.getPrice()));
+         final InfoBean infoBean = new InfoBean();
 
         shoppingcountcontent.setOnNumberChangeListener(new AddSubView.OnNumberChangeListener() {
             @Override
@@ -676,31 +700,27 @@ public class AllGoodsInfoActivity extends AppCompatActivity implements View.OnCl
             }
         });
 
+        infoBean.setGoodsName(items.getGoods_name());
+        infoBean.setGoodsDesc(items.getGoods_desc());
+        infoBean.setImageUrl(items.getGoods_image());
+        infoBean.setPrice(items.getPrice());
+
+
 
         popubtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                for(int i = 0; i <arrayList.size() ; i++) {
+                    string+=arrayList.get(i);
+                }
+                infoBean.setGoodsInfo(string);
+                Log.e("TAG",string);
+
+                HelperManager.getInstance().getGoodsInfoDAO().AddGoods(infoBean);
                 UIUtils.showToast("已加入购物车");
-                GoodsInfoDAO dao = new GoodsInfoDAO(AllGoodsInfoActivity.this);
-                dao.AddGoods(infoBean);
+
             }
         });
-
-    }
-
-    private void SetRadioButtonView(List<AllGoodsInfoBean.DataBean.ItemsBean.SkuInfoBean.AttrListBean> attrList, int j, final RadioButton radioButton) {
-        //设置button为null
-        radioButton.setButtonDrawable(new ColorDrawable(Color.TRANSPARENT));
-        radioButton.setGravity(Gravity.CENTER);
-        //设置背景选择器
-        radioButton.setBackgroundResource(R.drawable.radio_group_selector);
-
-        radioButton.setWidth(DensityUtil.dip2px(this,100));
-        radioButton.setHeight(DensityUtil.dip2px(this,100));
-
-        radioButton.setText(attrList.get(j).getAttr_name());
-        radioButton.setTextColor(Color.WHITE);
-        radioButton.setPadding(2, 1, 2, 1);
 
     }
 
@@ -719,7 +739,7 @@ public class AllGoodsInfoActivity extends AppCompatActivity implements View.OnCl
                 finish();
                 break;
             case R.id.navigation_cart:
-                Intent intent=new Intent(this,CartShoppingActivity.class);
+                Intent intent = new Intent(this, CartShoppingActivity.class);
                 startActivity(intent);
                 break;
             case R.id.ic_custom_service:

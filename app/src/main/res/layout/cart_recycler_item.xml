@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="120dp"
+    android:minHeight="120dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#2c2f34">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="120dp">
 
         <CheckBox
             android:id="@+id/checkbox_all"
@@ -22,15 +23,15 @@
             android:layout_toRightOf="@id/checkbox_all"
             android:id="@+id/goodsinfo_image"
             android:layout_marginLeft="15dp"
-            android:layout_width="60dp"
+            android:layout_width="70dp"
             android:layout_centerVertical="true"
-            android:layout_height="60dp" />
+            android:layout_height="70dp" />
 
         <TextView
             android:layout_toRightOf="@id/goodsinfo_image"
             android:layout_alignTop="@id/goodsinfo_image"
             android:layout_marginLeft="15dp"
-            android:visibility="gone"
+            android:layout_marginRight="30dp"
             android:id="@+id/goodsinfo_name"
             android:textColor="#6c6d6e"
             android:text="商品名称"
@@ -42,8 +43,10 @@
 
 
         <TextView
-            android:layout_alignLeft="@id/goodsinfo_name"
-            android:layout_below="@id/goodsinfo_name"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/goodsinfo_image"
+            android:layout_marginTop="45dp"
+            android:visibility="gone"
             android:id="@+id/goodsinfo_content"
             android:textColor="#6c6d6e"
             android:text="商品简介"
@@ -56,11 +59,11 @@
         <atguigu.com.actualproject.view.AddSubView
             android:visibility="gone"
             android:id="@+id/shopping_count_content"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_alignLeft="@id/goodsinfo_content"
-            android:layout_above="@id/goodsinfo_content"
-            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_toRightOf="@id/goodsinfo_image"
+            android:layout_alignTop="@id/goodsinfo_image"
+            android:layout_marginLeft="15dp"
             android:orientation="horizontal"
             app:maxvalue="100"
             app:minvalue="0"
@@ -98,7 +101,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_marginTop="55dp"
             android:layout_marginRight="15dp"
             android:layout_alignParentRight="true"
@@ -135,8 +138,14 @@
             android:textColor="#ffffff"
             android:text="删除"
             android:layout_width="50dp"
-            android:layout_height="100dp" />
+            android:layout_height="120dp" />
 
     </RelativeLayout>
+
+    <View
+        android:layout_alignParentBottom="true"
+        android:background="#1e2125"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"/>
 
 </RelativeLayout>

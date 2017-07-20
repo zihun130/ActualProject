@@ -14,6 +14,6 @@ public class GoodsInfoTable {
     public static final String COUNT="Count";
     public static final String GOODSINFO="Info";
     //创建表语句
-    public static final String CREATE_TABLE="create table "+TABLE_NAME+"("+NAME+" text,"+IMAGEURL+" text,"+DESC+" text,"+PRICE+" double,"+COUNT+" integer,"+GOODSINFO+" text,)";
+    public static final String CREATE_TABLE="create table "+TABLE_NAME+"("+NAME+" text,"+IMAGEURL+" text,"+DESC+" text,"+PRICE+" double,"+COUNT+" integer,"+GOODSINFO+" text)";
 
 }
