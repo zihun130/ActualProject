@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/third_login"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <ImageButton
+        android:layout_marginLeft="25dp"
+        android:id="@+id/app_tencent_qq"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="#ffffff"
+        android:src="@drawable/qq_normal" />
+
+    <ImageButton
+        android:layout_marginLeft="25dp"
+        android:id="@+id/app_tencent_weixin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="#ffffff"
+        android:src="@drawable/sina_normal" />
+
+    <ImageButton
+        android:layout_marginLeft="25dp"
+        android:id="@+id/app_weibo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="#ffffff"
+        android:src="@drawable/qzone_forward_normal" />
+
+    <ImageButton
+        android:layout_marginLeft="25dp"
+        android:id="@+id/app_wxfriend"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="#ffffff"
+        android:src="@drawable/wxfriend_normal" />
+
+</LinearLayout>

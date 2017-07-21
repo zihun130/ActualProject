@@ -162,7 +162,7 @@ public class AllGoodsInfoActivity extends AppCompatActivity implements View.OnCl
     private String shoesText;
     private String colorText;
     private String clothingText;
-    private String string;
+    private String string="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -380,7 +380,8 @@ public class AllGoodsInfoActivity extends AppCompatActivity implements View.OnCl
                             @Override
                             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                                 if(isChecked) {
-                                    countText = "数量:"+buttonView.getText().toString();
+                                    countText = "数量:"+buttonView.getText().toString()+" ";
+                                    arrayList.clear();
                                     arrayList.add(countText);
                                     Log.e("TAG",countText);
                                 }
@@ -428,7 +429,8 @@ public class AllGoodsInfoActivity extends AppCompatActivity implements View.OnCl
                             @Override
                             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                                 if(isChecked) {
-                                    capacityText ="容量:"+buttonView.getText().toString();
+                                    capacityText ="容量:"+buttonView.getText().toString()+" ";
+                                    arrayList.clear();
                                     arrayList.add(capacityText);
                                     Log.e("TAG",capacityText);
                                 }
@@ -475,7 +477,8 @@ public class AllGoodsInfoActivity extends AppCompatActivity implements View.OnCl
                             @Override
                             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                                 if(isChecked) {
-                                    typeText = "种类:"+buttonView.getText().toString();
+                                    typeText = "种类:"+buttonView.getText().toString()+" ";
+                                    arrayList.clear();
                                     arrayList.add(typeText);
                                     Log.e("TAG",typeText);
                                 }
@@ -522,7 +525,8 @@ public class AllGoodsInfoActivity extends AppCompatActivity implements View.OnCl
                             @Override
                             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                                 if(isChecked) {
-                                    colorText ="颜色:"+buttonView.getText().toString();
+                                    colorText ="颜色:"+buttonView.getText().toString()+" ";
+                                    arrayList.clear();
                                     arrayList.add(colorText);
                                     Log.e("TAG",colorText);
                                 }
@@ -570,7 +574,8 @@ public class AllGoodsInfoActivity extends AppCompatActivity implements View.OnCl
                             @Override
                             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                                 if(isChecked) {
-                                    sizeText = "尺寸:"+buttonView.getText().toString();
+                                    sizeText = "尺寸:"+buttonView.getText().toString()+" ";
+                                    arrayList.clear();
                                     arrayList.add(sizeText);
                                     Log.e("TAG",sizeText);
                                 }
@@ -617,7 +622,8 @@ public class AllGoodsInfoActivity extends AppCompatActivity implements View.OnCl
                             @Override
                             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                                 if(isChecked) {
-                                    clothingText ="服装:"+buttonView.getText().toString();
+                                    clothingText ="服装:"+buttonView.getText().toString()+" ";
+                                    arrayList.clear();
                                     arrayList.add(clothingText);
                                     Log.e("TAG",clothingText);
                                 }
@@ -665,7 +671,8 @@ public class AllGoodsInfoActivity extends AppCompatActivity implements View.OnCl
                             @Override
                             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                                 if(isChecked) {
-                                    shoesText ="鞋:"+buttonView.getText().toString();
+                                    shoesText ="鞋:"+buttonView.getText().toString()+" ";
+                                    arrayList.clear();
                                     arrayList.add(shoesText);
                                     Log.e("TAG",shoesText);
                                 }
@@ -715,7 +722,6 @@ public class AllGoodsInfoActivity extends AppCompatActivity implements View.OnCl
                 }
                 infoBean.setGoodsInfo(string);
                 Log.e("TAG",string);
-
                 HelperManager.getInstance().getGoodsInfoDAO().AddGoods(infoBean);
                 UIUtils.showToast("已加入购物车");
 

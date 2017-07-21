@@ -49,6 +49,10 @@ public class Constant {
     public static final String MAGAZINEELEVEN="http://mobile.iliangcang.com/topic/magazineList?app_key=Android&author_id=13&sig=2FA0974FFF1BC3DFA562AA63C8B5A84F%7C118265010131868&v=1.0";
     public static final String MAGAZINETWELVE="http://mobile.iliangcang.com/topic/magazineList?app_key=Android&author_id=14&sig=2FA0974FFF1BC3DFA562AA63C8B5A84F%7C118265010131868&v=1.0";
 
-
+    //登录接口
+    public static final String HOST ="47.93.118.241";//提供ip地址
+    public static final String BASE_URL ="http://" +HOST +":8081/P2PInvest/";
+    public static final String LOGIN =BASE_URL +"login";//访问登录的url
+    public static final String REGISTER =BASE_URL +"UserRegister";//注册
 
 }

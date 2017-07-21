@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -93,6 +94,7 @@ public class CartShoppingActivity extends AppCompatActivity {
 
     private List<InfoBean> allGoodsContent;
     private CartRecyclerAdapter adapter;
+    private static final boolean isDelete=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,16 +113,9 @@ public class CartShoppingActivity extends AppCompatActivity {
     }
 
     private void initData() {
-
-        allGoodsContent = HelperManager.getInstance().getGoodsInfoDAO().getAllGoodsContent();
-
-        adapter = new CartRecyclerAdapter(this, allGoodsContent, allPriceText, checkboxAll, editDeleter);
-        cartRecyclerview.setAdapter(adapter);
-        cartRecyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
 
-
-    @OnClick({R.id.title_back, R.id.cart_btn,R.id.checkbox_all})
+    @OnClick({R.id.title_back, R.id.cart_btn,R.id.checkbox_all,R.id.edit_deleter})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.title_back:
@@ -133,8 +128,41 @@ public class CartShoppingActivity extends AppCompatActivity {
                 adapter.checkAll_none(checked);
                 adapter.showTotalPrice();
                 break;
+            case R.id.edit_deleter:
 
+                break;
         }
     }
+
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        allGoodsContent = HelperManager.getInstance().getGoodsInfoDAO().getAllGoodsContent();
+        Log.e("TAG","数据信息"+allGoodsContent.get(0).getGoodsInfo());
+
+        adapter = new CartRecyclerAdapter(this, allGoodsContent, allPriceText, checkboxAll, editDeleter,isDelete);
+        cartRecyclerview.setAdapter(adapter);
+        cartRecyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+        adapter.setOnItemClickListener(new CartRecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+                InfoBean infoBean = allGoodsContent.get(position);
+                boolean checked = infoBean.isChecked();
+                infoBean.setChecked(!checked);
+                //3.显示总价格
+                adapter.showTotalPrice();
+                //4.刷新适配器
+                adapter.notifyItemChanged(position);
+
+                //5.校验全选CheckBox和删除的CheckBox
+                adapter.checkAll();
+            }
+        });
+    }
+
 
 }

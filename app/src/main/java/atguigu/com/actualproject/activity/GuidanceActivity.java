@@ -1,6 +1,7 @@
 package atguigu.com.actualproject.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -17,6 +18,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import java.util.ArrayList;
 
 import atguigu.com.actualproject.R;
+import atguigu.com.actualproject.login.LoginActivity;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -115,7 +117,22 @@ public class GuidanceActivity extends AppCompatActivity {
 
     @OnClick(R.id.imagebtn)
     public void onViewClicked() {
-        startActivity(new Intent(GuidanceActivity.this,MainActivity.class));
-        finish();
+        if(isLogin()) {
+            startActivity(new Intent(GuidanceActivity.this,MainActivity.class));
+        }else {
+            startActivity(new Intent(GuidanceActivity.this,LoginActivity.class));
+        }
+       finish();
+    }
+
+    private boolean isLogin() {
+        SharedPreferences sp = getSharedPreferences("loginBean", MODE_PRIVATE);
+        String name = sp.getString("name","admin");
+        if(name.equals("admin")) {
+            return false;
+        }else {
+            return true;
+        }
+
     }
 }

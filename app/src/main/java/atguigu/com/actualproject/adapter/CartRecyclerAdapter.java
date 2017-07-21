@@ -37,38 +37,21 @@ public class CartRecyclerAdapter extends RecyclerView.Adapter<CartRecyclerAdapte
     private static final int ACTION_EDIT = 1;
     //完成状态
     private static final int ACTION_COMPLETE = 2;
+    private boolean isDelete;
 
 
-    public CartRecyclerAdapter(Context context, List<InfoBean> allGoodsContent, TextView allPriceText, CheckBox checkboxAll, TextView editDeleter) {
+    public CartRecyclerAdapter(Context context, List<InfoBean> allGoodsContent, TextView allPriceText, CheckBox checkboxAll, TextView editDeleter, boolean isDelete) {
         this.context = context;
         this.datas = allGoodsContent;
         this.allPriceText = allPriceText;
         this.checkboxAll = checkboxAll;
         this.editDeleter = editDeleter;
+        this.isDelete = isDelete;
         editDeleter.setTag(ACTION_EDIT);
-
+        checkAll();
         showTotalPrice();
 
     }
-
-    public void showTotalPrice() {
-        allPriceText.setText(getTotalPrice() + "");
-
-    }
-
-    private double getTotalPrice() {
-        double total = 0;
-        if (datas != null && datas.size() > 0) {
-            for (int i = 0; i < datas.size(); i++) {
-                if (datas.get(i).isChecked()) {
-                    total = total + datas.get(i).getCount() * Double.parseDouble(datas.get(i).getPrice());
-
-                }
-            }
-        }
-        return total;
-    }
-
 
     @Override
     public CartViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -82,6 +65,15 @@ public class CartRecyclerAdapter extends RecyclerView.Adapter<CartRecyclerAdapte
 
         holder.checkboxNone.setChecked(infoBean.isChecked());
 
+        /*int tag = (int) editDeleter.getTag();
+        if (tag == ACTION_EDIT) {
+            showDelete(holder.goodsinfoName, holder.countText, holder.shoppingCountContent, holder.recyclerviewBtn, holder.goodsinfoContent);
+
+        }
+        if (tag == ACTION_COMPLETE) {
+            hideDelete(holder.goodsinfoName, holder.countText, holder.shoppingCountContent, holder.recyclerviewBtn, holder.goodsinfoContent);
+        }*/
+
         Glide.with(context)
                 .load(infoBean.getImageUrl())
                 .into(holder.goodsinfoImage);
@@ -93,13 +85,13 @@ public class CartRecyclerAdapter extends RecyclerView.Adapter<CartRecyclerAdapte
         holder.setListener(position);
     }
 
-    private void hideDelete(TextView goodsinfoName,TextView countText, AddSubView shoppingCountContent, Button recyclerviewBtn, TextView goodsinfoContent) {
+    public void hideDelete(TextView goodsinfoName, TextView countText, AddSubView shoppingCountContent, Button recyclerviewBtn, TextView goodsinfoContent) {
 
         editDeleter.setText("编辑");
         editDeleter.setTag(ACTION_EDIT);
-        RelativeLayout.LayoutParams params= (RelativeLayout.LayoutParams) goodsinfoName.getLayoutParams();
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) goodsinfoName.getLayoutParams();
 
-        params.setMargins(DensityUtil.dip2px(context,15),0,0,0);
+        params.setMargins(DensityUtil.dip2px(context, 15), 0, 0, 0);
 
         goodsinfoName.setLayoutParams(params);
         goodsinfoContent.setVisibility(View.VISIBLE);
@@ -110,19 +102,19 @@ public class CartRecyclerAdapter extends RecyclerView.Adapter<CartRecyclerAdapte
         showTotalPrice();
     }
 
-    private void showDelete(TextView goodsinfoName, TextView countText, AddSubView shoppingCountContent, Button recyclerviewBtn, TextView goodsinfoContent) {
+    public void showDelete(final TextView goodsinfoName, final TextView countText, final AddSubView shoppingCountContent, final Button recyclerviewBtn, final TextView goodsinfoContent) {
         editDeleter.setText("完成");
         editDeleter.setTag(ACTION_COMPLETE);
         goodsinfoContent.setVisibility(View.GONE);
-        RelativeLayout.LayoutParams params= (RelativeLayout.LayoutParams) goodsinfoName.getLayoutParams();
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) goodsinfoName.getLayoutParams();
 
-        params.setMargins(DensityUtil.dip2px(context,15),DensityUtil.dip2px(context,30),0,0);
+        params.setMargins(DensityUtil.dip2px(context, 15), DensityUtil.dip2px(context, 30), 0, 0);
+
 
         goodsinfoName.setLayoutParams(params);
         countText.setVisibility(View.GONE);
         shoppingCountContent.setVisibility(View.VISIBLE);
         recyclerviewBtn.setVisibility(View.VISIBLE);
-        checkAll();
         showTotalPrice();
     }
 
@@ -159,35 +151,32 @@ public class CartRecyclerAdapter extends RecyclerView.Adapter<CartRecyclerAdapte
             super(view);
             ButterKnife.inject(this, view);
 
+            view.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    int tag = (int) editDeleter.getTag();
+                    if (tag == ACTION_EDIT) {
+                        showDelete(goodsinfoName, countText, shoppingCountContent, recyclerviewBtn, goodsinfoContent);
+
+                    }
+                    if (tag == ACTION_COMPLETE) {
+                        hideDelete(goodsinfoName, countText, shoppingCountContent, recyclerviewBtn, goodsinfoContent);
+                    }
+                    return true;
+                }
+            });
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //状态取反
-                    InfoBean infoBean = datas.get(getLayoutPosition());
-                    infoBean.setChecked(!infoBean.isChecked());
+                    if (onItemClickListener != null) {
 
-                    //刷新适配器
-                    notifyItemChanged(getLayoutPosition());
-                    //重新显示总价格
-                    showTotalPrice();
-                    //校验是否全选
-                    checkAll();
-                }
-            });
-
-
-            editDeleter.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int tag = (int) editDeleter.getTag();
-                    if (tag == ACTION_EDIT) {
-                        showDelete(goodsinfoName,countText,shoppingCountContent,recyclerviewBtn,goodsinfoContent);
-                    } else {
-                        hideDelete(goodsinfoName,countText,shoppingCountContent,recyclerviewBtn,goodsinfoContent);
+                        onItemClickListener.onItemClick(v, getLayoutPosition());
                     }
                 }
             });
+
+
         }
 
         public void setListener(final int position) {
@@ -195,6 +184,7 @@ public class CartRecyclerAdapter extends RecyclerView.Adapter<CartRecyclerAdapte
                 @Override
                 public void onClick(View v) {
                     InfoBean bean = datas.get(position);
+                    datas.remove(position);
                     HelperManager.getInstance().getGoodsInfoDAO().DeleteGoods(bean.getImageUrl());
                     notifyDataSetChanged();
                 }
@@ -210,33 +200,51 @@ public class CartRecyclerAdapter extends RecyclerView.Adapter<CartRecyclerAdapte
                 infoBean.setChecked(isChecked);
                 notifyItemChanged(i);
             }
-        } else {
-            checkboxAll.setChecked(false);
         }
     }
 
     public void checkAll() {
         if (datas != null && datas.size() > 0) {
 
-            int number=0;
-
             for (int i = 0; i < datas.size(); i++) {
                 InfoBean infoBean = datas.get(i);
                 if (!infoBean.isChecked()) {
                     checkboxAll.setChecked(false);
-                }else {
-                    number++;
+                    return;
                 }
             }
-            if(number ==datas.size()){
-                checkboxAll.setChecked(true);
-            }
+            checkboxAll.setChecked(true);
         } else {
             checkboxAll.setChecked(false);
-
         }
     }
 
+    public void showTotalPrice() {
+        allPriceText.setText(getTotalPrice() + "");
+    }
+
+    private double getTotalPrice() {
+        double total = 0;
+        if (datas != null && datas.size() > 0) {
+            for (int i = 0; i < datas.size(); i++) {
+                InfoBean infoBean = datas.get(i);
+                if (infoBean.isChecked()) {
+                    total = total + datas.get(i).getCount() * Double.parseDouble(datas.get(i).getPrice());
+
+                }
+            }
+        }
+        return total;
+    }
 
 
+    private OnItemClickListener onItemClickListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
 }
