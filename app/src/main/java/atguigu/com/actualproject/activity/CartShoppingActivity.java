@@ -1,5 +1,6 @@
 package atguigu.com.actualproject.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -122,6 +123,8 @@ public class CartShoppingActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.cart_btn:
+                Intent intent=new Intent(this,IndentDetailsActivity.class);
+                startActivity(intent);
                 break;
             case R.id.checkbox_all:
                 boolean checked = checkboxAll.isChecked();
@@ -129,12 +132,9 @@ public class CartShoppingActivity extends AppCompatActivity {
                 adapter.showTotalPrice();
                 break;
             case R.id.edit_deleter:
-
                 break;
         }
     }
-
-
 
     @Override
     protected void onResume() {

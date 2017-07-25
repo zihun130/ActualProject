@@ -1,6 +1,7 @@
 package atguigu.com.actualproject.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -34,7 +35,11 @@ public class WelcomeActivity extends AppCompatActivity {
             super.handleMessage(msg);
             switch (msg.what) {
                 case MESSAGE_SUCCESS:
-                    startActivity(new Intent(WelcomeActivity.this, GuidanceActivity.class));
+                    if(isLogin()) {
+                        startActivity(new Intent(WelcomeActivity.this,MainActivity.class));
+                    }else {
+                        startActivity(new Intent(WelcomeActivity.this,GuidanceActivity.class));
+                    }
                     overridePendingTransition(R.anim.right_in,R.anim.left_out);
                     finish();
                     break;
@@ -68,6 +73,19 @@ public class WelcomeActivity extends AppCompatActivity {
                         return false;
                     }
                 }).into(new GlideDrawableImageViewTarget(imageview,1));
+    }
+
+
+
+    private boolean isLogin() {
+        SharedPreferences sp = getSharedPreferences("loginBean", MODE_PRIVATE);
+        String name = sp.getString("name","admin");
+        if(name.equals("admin")) {
+            return false;
+        }else {
+            return true;
+        }
+
     }
 
 }

@@ -1,8 +1,831 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/IJK_drawableLayout"
+    android:layout_height="match_parent"
+    android:background="#eaeaea"
+    android:orientation="vertical">
 
-    <include layout="@layout/title_bar"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-</LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#fb7299">
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:id="@+id/navigation_drawer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/ic_navigation_drawer" />
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:id="@+id/default_avatar"
+                android:layout_toRightOf="@id/navigation_drawer"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/bili_default_avatar" />
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/default_avatar"
+                android:id="@+id/login_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="未登录"
+                android:textColor="#ffffff"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp">
+
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/login_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_bml_home" />
+
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/game_center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/ic_menu_top_game_center" />
+
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/menu_download"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/ic_toolbar_menu_download" />
+
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/download_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/ic_download_search" />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.youth.banner.Banner
+                    android:id="@+id/bilibili_banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp">
+                </com.youth.banner.Banner>
+
+                <LinearLayout
+                    android:background="#fafafa"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/bilibili_attention"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/background_select"
+                        android:drawableTop="@drawable/live_home_follow_anchor"
+                        android:gravity="center_horizontal"
+                        android:text="关注"
+                        android:textColor="#404040"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/bilibili_center"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/background_select"
+                        android:drawableTop="@drawable/live_home_live_center"
+                        android:gravity="center_horizontal"
+                        android:text="中心"
+                        android:textColor="#404040"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/bilibili_video"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/background_select"
+                        android:drawableTop="@drawable/live_home_clip_video"
+                        android:gravity="center_horizontal"
+                        android:text="小视频"
+                        android:textColor="#404040"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/bilibili_search"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/background_select"
+                        android:drawableTop="@drawable/live_home_search_room"
+                        android:gravity="center_horizontal"
+                        android:text="搜索"
+                        android:textColor="#404040"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/bilibili_type"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/background_select"
+                        android:drawableTop="@drawable/live_home_all_category"
+                        android:gravity="center_horizontal"
+                        android:text="分类"
+                        android:textColor="#404040"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/drawing_prefecture"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/default_share_image" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:text="绘画专区"
+                        android:textColor="#515151"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_drawing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"
+                        android:drawablePadding="5dp"
+                        android:drawableRight="@drawable/ic_gray_arrow_right"
+                        android:text="当前有58个直播"
+                        android:textColor="#515151"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/drawing_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+
+                <Button
+                    android:id="@+id/drawing_more_btn"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/more_bg_shape"
+                    android:text="查看更多"
+                    android:textColor="#393939"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/living_recreation"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/default_share_image" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:text="生活娱乐"
+                        android:textColor="#515151"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_living"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"
+                        android:drawablePadding="5dp"
+                        android:drawableRight="@drawable/ic_gray_arrow_right"
+                        android:text="当前有669个直播"
+                        android:textColor="#515151"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/living_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+                <Button
+                    android:id="@+id/living_more_btn"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/more_bg_shape"
+                    android:text="查看更多"
+                    android:textColor="#393939"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/songing_dance"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/default_share_image" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:text="唱见舞见"
+                        android:textColor="#515151"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_songing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"
+                        android:drawablePadding="5dp"
+                        android:drawableRight="@drawable/ic_gray_arrow_right"
+                        android:text="当前有38个直播"
+                        android:textColor="#515151"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/songing_dance_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+                <Button
+                    android:id="@+id/songing_more_btn"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/more_bg_shape"
+                    android:text="查看更多"
+                    android:textColor="#393939"
+                    android:textSize="14sp" />
+
+
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/phone_game"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/default_share_image" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:text="手游直播"
+                        android:textColor="#515151"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_phone_game"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"
+                        android:drawablePadding="5dp"
+                        android:drawableRight="@drawable/ic_gray_arrow_right"
+                        android:text="当前有38个直播"
+                        android:textColor="#515151"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/phone_game_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+                <Button
+                    android:id="@+id/phone_more_btn"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/more_bg_shape"
+                    android:text="查看更多"
+                    android:textColor="#393939"
+                    android:textSize="14sp" />
+
+
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/stand_alone"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/default_share_image" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:text="单机联机"
+                        android:textColor="#515151"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_stand_alone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"
+                        android:drawablePadding="5dp"
+                        android:drawableRight="@drawable/ic_gray_arrow_right"
+                        android:text="当前有558个直播"
+                        android:textColor="#515151"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/stand_alone_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+                <Button
+                    android:id="@+id/stand_more_btn"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/more_bg_shape"
+                    android:text="查看更多"
+                    android:textColor="#393939"
+                    android:textSize="14sp" />
+
+
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/online_game"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/default_share_image" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:text="网络游戏"
+                        android:textColor="#515151"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_online_game"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"
+                        android:drawablePadding="5dp"
+                        android:drawableRight="@drawable/ic_gray_arrow_right"
+                        android:text="当前有327个直播"
+                        android:textColor="#515151"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/online_game_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+                <Button
+                    android:id="@+id/online_more_btn"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/more_bg_shape"
+                    android:text="查看更多"
+                    android:textColor="#393939"
+                    android:textSize="14sp" />
+
+
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/e_sports"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/default_share_image" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:text="电子竞技"
+                        android:textColor="#515151"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_e_sports"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"
+                        android:drawablePadding="5dp"
+                        android:drawableRight="@drawable/ic_gray_arrow_right"
+                        android:text="当前有355个直播"
+                        android:textColor="#515151"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/e_sports_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+                <Button
+                    android:id="@+id/e_more_btn"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/more_bg_shape"
+                    android:text="查看更多"
+                    android:textColor="#393939"
+                    android:textSize="14sp" />
+
+
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/Otaku_culture"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/default_share_image" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:text="御宅文化"
+                        android:textColor="#515151"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_Otaku_culture"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"
+                        android:drawablePadding="5dp"
+                        android:drawableRight="@drawable/ic_gray_arrow_right"
+                        android:text="当前有13个直播"
+                        android:textColor="#515151"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/Otaku_culture_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+                <Button
+                    android:id="@+id/Otaku_more_btn"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/more_bg_shape"
+                    android:text="查看更多"
+                    android:textColor="#393939"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+        <LinearLayout
+            android:background="#ffffff"
+            android:orientation="vertical"
+            android:id="@+id/left_drawing"
+            android:layout_gravity="start"
+            android:layout_width="200dp"
+            android:layout_height="match_parent">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:background="#f8668d"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp">
+
+                        <LinearLayout
+                            android:layout_centerVertical="true"
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/title_drawing"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_marginLeft="20dp"
+                                android:src="@drawable/bili_default_avatar" />
+
+                            <TextView
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="8dp"
+                                android:textColor="#ffffff"
+                                android:textSize="12sp"
+                                android:text="点击头像登录"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+                        <CheckBox
+                            android:layout_marginTop="25dp"
+                            android:layout_marginRight="20dp"
+                            android:button="@null"
+                            android:layout_alignParentRight="true"
+                            android:drawableLeft="@drawable/night_daily_select"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
+
+
+                    <TextView
+                        android:paddingLeft="15dp"
+                        android:drawableLeft="@drawable/ic_home_black_24dp"
+                        android:layout_marginTop="5dp"
+                        android:drawablePadding="20dp"
+                        android:textSize="16sp"
+                        android:background="#d4d4d4"
+                        android:gravity="center_vertical"
+                        android:text="首页"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp" />
+
+                    <TextView
+                        android:paddingLeft="15dp"
+                        android:drawableLeft="@drawable/ic_nav_vip"
+                        android:layout_marginTop="5dp"
+                        android:drawablePadding="20dp"
+                        android:textSize="16sp"
+                        android:gravity="center_vertical"
+                        android:text="我的大会员"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp" />
+
+                    <TextView
+                        android:paddingLeft="15dp"
+                        android:drawableLeft="@drawable/ic_nav_point"
+                        android:layout_marginTop="5dp"
+                        android:drawablePadding="20dp"
+                        android:textSize="16sp"
+                        android:gravity="center_vertical"
+                        android:text="会员积分"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp" />
+
+                    <TextView
+                        android:paddingLeft="15dp"
+                        android:drawableLeft="@drawable/ic_nav_unicom"
+                        android:layout_marginTop="5dp"
+                        android:drawablePadding="20dp"
+                        android:textSize="16sp"
+                        android:gravity="center_vertical"
+                        android:text="免流量服务"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp" />
+
+
+                    <TextView
+                        android:paddingLeft="15dp"
+                        android:drawableLeft="@drawable/ic_download_grey_24dp"
+                        android:layout_marginTop="5dp"
+                        android:drawablePadding="20dp"
+                        android:textSize="16sp"
+                        android:gravity="center_vertical"
+                        android:text="离线缓存"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp" />
+
+                    <View
+                        android:background="#e1e1e1"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"/>
+
+                    <TextView
+                        android:paddingLeft="15dp"
+                        android:drawableLeft="@drawable/ic_bml_ticket"
+                        android:layout_marginTop="5dp"
+                        android:drawablePadding="20dp"
+                        android:textSize="16sp"
+                        android:gravity="center_vertical"
+                        android:text="BML订单"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp" />
+
+                    <TextView
+                        android:paddingLeft="15dp"
+                        android:drawableLeft="@drawable/ic_view_later_24dp"
+                        android:layout_marginTop="5dp"
+                        android:drawablePadding="20dp"
+                        android:textSize="16sp"
+                        android:gravity="center_vertical"
+                        android:text="稍后观看"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp" />
+
+
+
+                    <TextView
+                        android:paddingLeft="15dp"
+                        android:drawableLeft="@drawable/ic_star_black_24dp"
+                        android:layout_marginTop="5dp"
+                        android:drawablePadding="20dp"
+                        android:textSize="16sp"
+                        android:gravity="center_vertical"
+                        android:text="我的收藏"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp" />
+
+
+
+
+                    <TextView
+                        android:paddingLeft="15dp"
+                        android:drawableLeft="@drawable/ic_history_black_24dp"
+                        android:layout_marginTop="5dp"
+                        android:drawablePadding="20dp"
+                        android:textSize="16sp"
+                        android:gravity="center_vertical"
+                        android:text="历史记录"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp" />
+
+
+                    <TextView
+                        android:paddingLeft="15dp"
+                        android:drawableLeft="@drawable/ic_people_black_24dp"
+                        android:layout_marginTop="5dp"
+                        android:drawablePadding="20dp"
+                        android:textSize="16sp"
+                        android:gravity="center_vertical"
+                        android:text="我的关注"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp" />
+
+
+
+                    <TextView
+                        android:paddingLeft="15dp"
+                        android:drawableLeft="@drawable/ic_account_balance_wallet_black_24dp"
+                        android:layout_marginTop="5dp"
+                        android:drawablePadding="20dp"
+                        android:textSize="16sp"
+                        android:gravity="center_vertical"
+                        android:text="B币钱包"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp" />
+
+
+                    <View
+                        android:background="#e1e1e1"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"/>
+
+
+                    <TextView
+                        android:paddingLeft="15dp"
+                        android:drawableLeft="@drawable/ic_color_lens_black_24dp"
+                        android:layout_marginTop="5dp"
+                        android:drawablePadding="20dp"
+                        android:textSize="16sp"
+                        android:gravity="center_vertical"
+                        android:text="主题选择"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp" />
+
+
+                    <TextView
+                        android:paddingLeft="15dp"
+                        android:drawableLeft="@drawable/ic_settings_black_24dp"
+                        android:layout_marginTop="5dp"
+                        android:drawablePadding="20dp"
+                        android:textSize="16sp"
+                        android:gravity="center_vertical"
+                        android:text="设置与帮助"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp" />
+
+
+
+                </LinearLayout>
+            </ScrollView>
+
+
+        </LinearLayout>
+
+
+</android.support.v4.widget.DrawerLayout>
